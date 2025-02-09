@@ -14,6 +14,8 @@ A experimental repo for SOAP, TOFU and ArgoCD-Workflow exercises and games.
 		- [Check with client](#check-with-client)
 		- [Create keys](#create-keys)
 		- [Encrypt file](#encrypt-file)
+	- [ARGOCD WORKFLOW](#argocd-workflow)
+		- [INSTALL](#install-1)
 
 
 
@@ -21,6 +23,10 @@ EXTERNAL DOKU
 -------------
 
 * [Encrypting using Hashicorp Vault](https://github.com/getsops/sops?tab=readme-ov-file#encrypting-using-hashicorp-vault)
+* [Argo Workflow Git-Repo](https://github.com/argoproj/argo-workflows?tab=readme-ov-file)
+* [Examples](https://github.com/argoproj/argo-workflows/tree/main/examples)
+* [Cron workflows](https://argo-workflows.readthedocs.io/en/latest/cron-workflows/)
+* [Volumes](https://argo-workflows.readthedocs.io/en/latest/walk-through/volumes/)
 
 INSTALL
 -------
@@ -111,3 +117,18 @@ $ vault write sops/keys/firstkey type=rsa-4096
 ```bash
 $ sops encrypt --hc-vault-transit $VAULT_ADDR/v1/sops/keys/firstkey examples/hello.test.tf > ./crypted/hello.test.tf
 ```
+
+ARGOCD WORKFLOW
+---------------
+
+### INSTALL
+
+Doku: [Quick Start](https://argo-workflows.readthedocs.io/en/latest/quick-start/)
+
+
+```bash
+$ ARGO_WORKFLOWS_VERSION="vX.Y.Z"
+$ kubectl create namespace argo
+$ kubectl apply -n argo -f "https://github.com/argoproj/argo-workflows/releases/download/${ARGO_WORKFLOWS_VERSION}/quick-start-minimal.yaml"
+```
+

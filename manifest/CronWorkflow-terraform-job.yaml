@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: terraform-job
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: "Replace"
+  startingDeadlineSeconds: 0
+
+  workflowSpec:
+    entrypoint: start-terraform-job
+
+    templates:
+      - name: clone-terraform-code-from-git
+        template: git-clone
+        arguments:
+          parameters:
+            - name: gitRepo
+              value: "https://github.com/OlafRadicke/docker-quaker-kr-de.git"
+            - name: gitBranch
+              value: "main"
+      # - name: start-terraform-job
+      #   steps:
+      #   - - name: clone-terraform-code-from-git
+      #       template: git-clone
+
