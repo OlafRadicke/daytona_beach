@@ -16,6 +16,7 @@ A experimental repo for SOAP, TOFU and ArgoCD-Workflow exercises and games.
 		- [Encrypt file](#encrypt-file)
 	- [ARGOCD WORKFLOW](#argocd-workflow)
 		- [INSTALL](#install-1)
+	- [KNOWN ISSUES](#known-issues)
 
 
 
@@ -27,6 +28,7 @@ EXTERNAL DOKU
 * [Examples](https://github.com/argoproj/argo-workflows/tree/main/examples)
 * [Cron workflows](https://argo-workflows.readthedocs.io/en/latest/cron-workflows/)
 * [Volumes](https://argo-workflows.readthedocs.io/en/latest/walk-through/volumes/)
+* [Workflow Templates](https://argo-workflows.readthedocs.io/en/latest/workflow-templates/)
 
 INSTALL
 -------
@@ -132,3 +134,7 @@ $ kubectl create namespace argo
 $ kubectl apply -n argo -f "https://github.com/argoproj/argo-workflows/releases/download/${ARGO_WORKFLOWS_VERSION}/quick-start-minimal.yaml"
 ```
 
+KNOWN ISSUES
+------------
+
+- The workflows fail if the templates are not installed first.

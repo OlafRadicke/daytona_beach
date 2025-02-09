@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  name: terraform-job
+  name: terraform-cronjob
 spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Replace"

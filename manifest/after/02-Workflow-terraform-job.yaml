@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: terraform-job
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: "Replace"
+  startingDeadlineSeconds: 0
+
+  # workflowSpec:
+  entrypoint: start-terraform-job
+
+  templates:
+    - name: start-terraform-job
+      steps:
+      - - name: get-now
+          templateRef:
+            name: get-now
+            template: get-now
+      # - - name: git-clone
+      #     inputs:
+      #       artifacts:
+      #       - name: argo-source
+      #         path: /src
+      #         git:
+      #           repo: https://github.com/argoproj/argo-workflows.git
+      #           revision: "v2.1.1"
+      #     container:
+      #       image: golang:1.10
+      #       command: [sh, -c]
+      #       args: ["git status && ls && cat VERSION"]
+      #       workingDir: /src
+
+      - - name: clone-terraform-code-from-git
+          templateRef:
+            name: git-operation
+            template: git-clone
+          # arguments:
+          #   parameters:
+          #     - name: gitRepo
+          #       value: "https://github.com/OlafRadicke/docker-quaker-kr-de.git"
+          #     - name: gitBranch
+          #       value: "main"
+      # - name: start-terraform-job
+      #   steps:
+      #   - - name: clone-terraform-code-from-git
+      #       template: git-clone
+

@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: get-now
+spec:
+  templates:
+    - name: get-now
+      container:
+        image: alpine:3.6
+        command: [sh, -c]
+        args: ["date; sleep 2"]
