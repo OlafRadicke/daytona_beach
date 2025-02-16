@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-server
+  labels:
+    app: vault-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:vault-server
+  template:
+    metadata:
+      labels:
+        app: vault-server
+    spec:
+      containers:
+      - name: vault-server
+        image: "vault:1.13.3"
+        ports:
+        - containerPort: 8200
+        env:
+        - name: VAULT_DEV_ROOT_TOKEN_ID
+          value: 'ChaNG_mY'
+        command: ["vault"]
+        args: ["server"]
+        resources:
+          requests:
+            cpu: 50m
+            memory: "10Mi"
+          limits:
+            cpu: 700m
+            memory: "200Mi"
+        volumeMounts:
+        - name: www
+          mountPath: /vault/config.d

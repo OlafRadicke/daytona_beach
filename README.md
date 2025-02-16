@@ -70,6 +70,8 @@ Cline install: https://developer.hashicorp.com/vault/install
 
 ### Start Server local
 
+[Docker image of Vault](https://hub.docker.com/_/vault)
+
 ```bash
 $ export VAULT_TOKEN=$(tr -dc 'A-Za-z0-9!?%=' < /dev/urandom | head -c 16)
 $ export VAULT_SERVER_PORT=8200
