@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-server
+  labels:
+    app: vault-server
+spec:
+  ports:
+  - port: 8200
+    name: vault
+  clusterIP: None
+  selector:
+    app: vault-server

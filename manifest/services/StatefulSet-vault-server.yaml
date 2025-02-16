@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: vault-server
   labels:
@@ -32,5 +32,12 @@ spec:
             cpu: 700m
             memory: "200Mi"
         volumeMounts:
-        - name: www
+        - name: config
           mountPath: /vault/config.d
+  volumes:
+    - name: config
+      hostPath:
+        path: /srv/pvc-vault-config
+      # persistentVolumeClaim:
+      #   claimName: vault-config
+
