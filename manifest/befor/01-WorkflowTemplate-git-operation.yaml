@@ -12,12 +12,6 @@ spec:
         git:
           repo: https://github.com/argoproj/argo-workflows.git
           revision: "v2.1.1"
-          # For private repositories, create a k8s secret containing the git credentials and
-          # reference the secret keys in the secret selectors: usernameSecret, passwordSecret,
-          # or sshPrivateKeySecret.
-          # NOTE: when authenticating via sshPrivateKeySecret, the repo URL should supplied in its
-          # SSH format (e.g. git@github.com:argoproj/argo-workflows.git). Similarly, when authenticating via
-          # basic auth, the URL should be in its HTTP form (e.g. https://github.com/argoproj/argo-workflows.git)
           # usernameSecret:
           #   name: github-creds
           #   key: username
@@ -27,26 +21,9 @@ spec:
           # sshPrivateKeySecret:
           #   name: github-creds
           #   key: ssh-private-key
-          #
-          # insecureIgnoreHostKey disables SSH strict host key checking during the git clone
-          # NOTE: this is unnecessary for the well-known public SSH keys from the major git
-          # providers (github, bitbucket, gitlab, azure) as these keys are already baked into
-          # the executor image which performs the clone.
-          # insecureIgnoreHostKey: true
-          #
-          # Shallow clones/fetches can be performed by providing a `depth`.
           # depth: 1
-          #
-          # Additional ref specs to fetch down prior to checkout can be
-          # provided with `fetch`. This may be necessary if `revision` is a
-          # non-branch/-tag ref and thus not covered by git's default fetch.
-          # See https://git-scm.com/book/en/v2/Git-Internals-The-Refspec for
-          # the refspec format.
           # fetch: refs/meta/*
           # fetch: refs/changes/*
-          #
-          # Single branch mode can be specified by providing a `singleBranch` and `branch` This mode
-          # is faster than passing in a revision, as it will only fetch the references to the given branch.
           # singleBranch: true
           # branch: my-branch
     container:
