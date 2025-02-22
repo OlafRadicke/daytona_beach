@@ -147,10 +147,11 @@ KNOWN ISSUES
 TODOs
 -----
 
-- Enable CronWorkflow
-- Vault Server
-- Checkout OpenTofu code
-- Run Terragrunt / OpenTofu
+- Enable CronWorkflow 0.0.x
+- Vault Server 0.2.x
+- Checkout OpenTofu code 0.3.x
+- Run Terragrunt / OpenTofu 0.4.x
+
 
 EXTERNAL DOCUMENTATION
 ----------------------
