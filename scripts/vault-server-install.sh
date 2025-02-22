@@ -6,4 +6,6 @@ set -u
 
 kubectx atlantic-ocean
 kubectl get node
-kubectl delete -n argo -f ./manifest/services
+
+
+kubectl create -n vault  -f ./manifest/services

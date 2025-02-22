@@ -17,6 +17,8 @@ A experimental repo for SOAP, TOFU and ArgoCD-Workflow exercises and games.
 	- [ARGOCD WORKFLOW](#argocd-workflow)
 		- [INSTALL](#install-1)
 	- [KNOWN ISSUES](#known-issues)
+	- [TODOs](#todos)
+	- [EXTERNAL DOCUMENTATION](#external-documentation)
 
 
 
@@ -140,3 +142,17 @@ KNOWN ISSUES
 ------------
 
 - The workflows fail if the templates are not installed first.
+
+
+TODOs
+-----
+
+- Enable CronWorkflow
+- Vault Server
+- Checkout OpenTofu code
+- Run Terragrunt / OpenTofu
+
+EXTERNAL DOCUMENTATION
+----------------------
+
+- [Teragrunt](https://terragrunt.gruntwork.io/)

@@ -1,14 +1,13 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: vault-server
   labels:
     app: vault-server
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app:vault-server
+      app: vault-server
   template:
     metadata:
       labels:
@@ -23,7 +22,10 @@ spec:
         - name: VAULT_DEV_ROOT_TOKEN_ID
           value: 'ChaNG_mY'
         command: ["vault"]
-        args: ["server"]
+        args:
+          - "server"
+          - "-config"
+          - "/vault/config.d"
         resources:
           requests:
             cpu: 50m
@@ -34,10 +36,18 @@ spec:
         volumeMounts:
         - name: config
           mountPath: /vault/config.d
-  volumes:
-    - name: config
-      hostPath:
-        path: /srv/pvc-vault-config
-      # persistentVolumeClaim:
-      #   claimName: vault-config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: local-storage
+
+    # spec:
+    #   accessModes: [ "ReadWriteOnce" ]
+    #   storageClassName: local-storage
+    #   resources:
+    #     requests:
+    #       storage: 100Mi
+
+
+
 

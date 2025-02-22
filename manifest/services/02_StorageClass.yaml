@@ -1,0 +1,61 @@
+# kind: StorageClass
+# apiVersion: storage.k8s.io/v1
+# metadata:
+#   name: local-storage
+# provisioner: k8s.io/minikube-hostpath
+# parameters:
+#   type: pd-ssd
+
+# ---
+# - name: config
+#   hostPath:
+#     path: /srv/pvc-vault-config
+#   # persistentVolumeClaim:
+#   #   claimName: vault-config
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: local-storage
+#   labels:
+#     type: local
+# spec:
+#   storageClassName: manual
+#   capacity:
+#     storage: 1Gi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: "/srv/pv-local-storage"
+
+# ---
+# apiVersion: v1
+# kind: PersistentVolume
+# metadata:
+#   name: local-storage
+#   labels:
+#     type: local
+#   annotations:
+#     kubectl.kubernetes.io/last-applied-configuration: ""
+# spec:
+#   capacity:
+#     storage: 100Mi
+#   accessModes:
+#     - ReadWriteOnce
+#   hostPath:
+#     path: "/srv/pv-local-storage"
+
+# ---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 100Mi
