@@ -1,7 +1,7 @@
 DAYTONA_BEACH
 =============
 
-A experimental repo for SOAP, TOFU and ArgoCD-Workflow exercises and games.
+A experimental repo for SOPS, TOFU and ArgoCD-Workflow exercises and experience.
 
 - [DAYTONA\_BEACH](#daytona_beach)
 	- [EXTERNAL DOKU](#external-doku)
@@ -150,6 +150,7 @@ TODOs
 - [X] Enable CronWorkflow 0.0.x
 - [X] Vault Server 0.2.x
 - [ ] Checkout OpenTofu code 0.3.x
+- [ ] SOPS: Secrets OPerationS
 - [ ] Run Terragrunt / OpenTofu 0.4.x
 
 
