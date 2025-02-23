@@ -6,7 +6,7 @@ A experimental repo for SOPS, TOFU and ArgoCD-Workflow exercises and experience.
 - [DAYTONA\_BEACH](#daytona_beach)
 	- [KNOWN ISSUES](#known-issues)
 	- [TODOs](#todos)
-	- [HOW-TO](#how-to)
+	- [HOWTO](#howto)
 	- [EXTERNAL DOCUMENTATION](#external-documentation)
 
 
@@ -25,10 +25,8 @@ TODOs
 - [ ] SOPS: Secrets OPerationS
 - [ ] Run Terragrunt / OpenTofu 0.4.x
 
-HOW-TO
+HOWTO
 ------
-
-Open...
 
 EXTERNAL DOCUMENTATION
 ----------------------
