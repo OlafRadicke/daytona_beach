@@ -3,7 +3,7 @@ kind: CronWorkflow
 metadata:
   name: terraform-cronjob
 spec:
-  schedule: "*/3 * * * *"
+  schedule: "*/1 * * * *"
   concurrencyPolicy: "Forbid"
   # startingDeadlineSeconds: 0
   successfulJobsHistoryLimit: 6

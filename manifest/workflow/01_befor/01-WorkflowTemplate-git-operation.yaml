@@ -3,6 +3,11 @@ kind: WorkflowTemplate
 metadata:
   name: git-operation
 spec:
+  parameters:
+    - name: gitRepo
+      value: "https://github.com/argoproj/argo-workflows.git"
+    - name: gitBranch
+      value: "main"
   templates:
   - name: git-clone
     inputs:
@@ -31,9 +36,6 @@ spec:
       command: [sh, -c]
       args: ["git status && ls && cat VERSION"]
       workingDir: /src
-
-
-
 
 
 
