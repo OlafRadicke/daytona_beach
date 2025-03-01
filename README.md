@@ -19,11 +19,12 @@ KNOWN ISSUES
 TODOs
 -----
 
-- [X] Enable CronWorkflow 0.0.x
-- [X] Vault Server 0.2.x
-- [ ] Checkout OpenTofu code 0.3.x
-- [ ] SOPS: Secrets OPerationS
-- [ ] Run Terragrunt / OpenTofu 0.4.x
+- [X] 0.0.x - Enable CronWorkflow
+- [X] 0.2.x - Vault Server
+- [X] 0.3.x - Checkout OpenTofu code
+- [ ] 0.4.x - run OpenTofu code
+- [ ] 0.5.x - Add OpenTofu backend
+- [ ] 0.6.x - Integrate SOPS: Secrets OPerationS
 
 HOW-TO
 ------
