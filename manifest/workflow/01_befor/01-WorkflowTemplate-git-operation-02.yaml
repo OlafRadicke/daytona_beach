@@ -7,15 +7,15 @@ spec:
   - name: git-clone-02
     inputs:
       parameters:
-        - name: gitRepo
-          value: "https://github.com/argoproj/argo-workflows.git"
-        - name: gitBranch
-          value: "main"
+        - name:   gitRepo
+          value:  "https://github.com/argoproj/argo-workflows.git"
+        - name:   gitBranch
+          value:  "main"
       artifacts:
-      - name: git-clone
-        path: /src
+      - name:     git-clone
+        path:     /src
         git:
-          repo: https://github.com/argoproj/argo-workflows.git
+          repo:   "{{inputs.parameters.gitRepo}}"
           revision: "{{inputs.parameters.gitBranch}}"
           # usernameSecret:
           #   name: github-creds
@@ -34,7 +34,7 @@ spec:
     container:
       image: golang:1.10
       command: [sh, -c]
-      args: ["git status && ls && cat VERSION"]
+      args: ["git status && ls && cat README.md"]
       workingDir: /src
 
 

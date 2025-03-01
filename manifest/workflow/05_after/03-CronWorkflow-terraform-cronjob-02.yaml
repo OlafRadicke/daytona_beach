@@ -30,7 +30,7 @@ spec:
               - name: gitRepo
                 value: https://github.com/OlafRadicke/daytona_beach.git
               - name: gitBranch
-                value: "0.3.0"
+                value: "main"
         - - name: get-version-of-terragrunt
             templateRef:
               name: terragrunt-operation
