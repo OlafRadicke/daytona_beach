@@ -14,7 +14,7 @@ spec:
     - name:       get-content-of-dir
       inputs:
         artifacts:
-        - name:   git-clone-src-04
+        - name:   input-git-clone-src-04
           path:   /src
       container:
         image:    alpine/terragrunt:1.10.3

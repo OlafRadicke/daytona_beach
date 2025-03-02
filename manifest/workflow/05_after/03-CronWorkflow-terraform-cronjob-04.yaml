@@ -17,7 +17,7 @@ spec:
       - name:           start-terraform-job-04
         steps:
 
-        - - name:       get-date
+        - - name:       get-date-04
             templateRef:
               name:     get-date-04
               template: get-now
@@ -38,19 +38,24 @@ spec:
               name:     get-date-04
               template: get-now
 
-        - - name:       get-dir
-            templateRef:
-              name:     get-date-04
-              template: get-conten-of-dir
-            arguments:
-              artifacts:
-              - name: git-clone-src-04
-                from: "{{steps.clone-terraform-code-from-git.outputs.artifacts.git-clone-src-04}}"
+        # - - name:       get-dir
+        #     templateRef:
+        #       name:     get-date-04
+        #       template: get-conten-of-dir
+        #     arguments:
+        #       artifacts:
+        #       - name: git-clone-src-04
+        #         from: "{{steps.clone-terraform-code-from-git.outputs.artifacts.git-clone-src-04}}"
 
         # - - name:       list-content-of-terragrunt-dir
         #     templateRef:
         #       name:     terragrunt-operation-04
         #       template: get-content-of-dir
+        #     arguments:
+        #       artifacts:
+        #       - name: input-git-clone-src-04
+        #         from: "{{steps.clone-terraform-code-from-git.outputs.artifacts.git-clone-src-04}}"
+
 
         # - - name:       get-version-of-terragrunt
         #     templateRef:
