@@ -45,6 +45,11 @@ spec:
 
     outputs:
       artifacts:
-      - name:     git-clone-src-04
+      - name:     out-git-clone-src
         path:     /src
+        # # archive:
+        # #   none: {}
+        # archive:
+        #   tar:
+        #     compressionLevel: 0
 

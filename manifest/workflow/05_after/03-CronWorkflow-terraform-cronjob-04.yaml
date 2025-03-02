@@ -22,6 +22,17 @@ spec:
               name:     get-date-04
               template: get-now
 
+        # - - name:       clone-terraform-code-from-git
+        #     templateRef:
+        #       name:     git-operation-04
+        #       template: git-clone-04
+        #     arguments:
+        #       parameters:
+        #       - name:   gitRepo
+        #         value:  https://github.com/OlafRadicke/daytona_beach.git
+        #       - name:   gitBranch
+        #         value:  "main"
+
         - - name:       clone-terraform-code-from-git
             templateRef:
               name:     git-operation-04
@@ -33,19 +44,20 @@ spec:
               - name:   gitBranch
                 value:  "main"
 
+
         - - name:       get-dat-2
             templateRef:
               name:     get-date-04
               template: get-now
 
-        # - - name:       get-dir
-        #     templateRef:
-        #       name:     get-date-04
-        #       template: get-conten-of-dir
-        #     arguments:
-        #       artifacts:
-        #       - name: git-clone-src-04
-        #         from: "{{steps.clone-terraform-code-from-git.outputs.artifacts.git-clone-src-04}}"
+        - - name:       get-dir
+            templateRef:
+              name:     get-date-04
+              template: get-conten-of-dir
+            arguments:
+              artifacts:
+              - name: git-clone-src-04
+                from: "{{steps.clone-terraform-code-from-git.outputs.artifacts.out-git-clone-src}}"
 
         # - - name:       list-content-of-terragrunt-dir
         #     templateRef:
@@ -53,8 +65,18 @@ spec:
         #       template: get-content-of-dir
         #     arguments:
         #       artifacts:
-        #       - name: input-git-clone-src-04
-        #         from: "{{steps.clone-terraform-code-from-git.outputs.artifacts.git-clone-src-04}}"
+        #       - name:   in-git-clone-src-04
+        #         from:   "{{steps.clone-terraform-code-from-git.outputs.artifacts.out-git-clone-src}}"
+
+        - - name:       list-content-of-terragrunt-dir-2
+            templateRef:
+              name:     terragrunt-operation-04
+              template: get-content-of-dir-2
+            # arguments:
+            #   artifacts:
+            #   - name:   in-git-clone-src-04
+            #     from:   "{{steps.clone-terraform-code-from-git.outputs.artifacts.out-git-clone-src}}"
+
 
 
         # - - name:       get-version-of-terragrunt
