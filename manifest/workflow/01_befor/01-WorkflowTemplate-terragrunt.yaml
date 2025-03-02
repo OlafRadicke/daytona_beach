@@ -16,3 +16,14 @@ spec:
         args:
           - "ls -lah"
           - "date"
+    - name: get-content-of-dir-03
+      inputs:
+        artifacts:
+        - name: git-clone-src-03
+          path:  /src
+      container:
+        image: alpine/terragrunt:1.10.3
+        command: ["/bin/sh","-c"]
+        args:
+          - "ls -lah"
+          - "date"

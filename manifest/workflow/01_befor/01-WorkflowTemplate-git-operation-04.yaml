@@ -1,22 +1,27 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: git-operation-02
+  name:           git-operation-04
 spec:
   templates:
-  - name: git-clone-02
+  - name:         git-clone-04
     inputs:
       parameters:
         - name:   gitRepo
           value:  "https://github.com/argoproj/argo-workflows.git"
         - name:   gitBranch
           value:  "main"
+
       artifacts:
-      - name:     git-clone
+      - name:     git-clone-src-04
         path:     /src
         git:
           repo:   "{{inputs.parameters.gitRepo}}"
-          revision: "{{inputs.parameters.gitBranch}}"
+          # revision: "{{inputs.parameters.gitBranch}}"
+          branch: "{{inputs.parameters.gitBranch}}"
+          singleBranch: true
+          # depth:  1
+
           # usernameSecret:
           #   name: github-creds
           #   key: username
@@ -28,15 +33,18 @@ spec:
           #   key: ssh-private-key
           # depth: 1
           # fetch: refs/meta/*
-          # fetch: refs/changes/*
           # singleBranch: true
           # branch: my-branch
+          # revision: "{{inputs.parameters.gitBranch}}"
+
     container:
-      image: golang:1.10
-      command: [sh, -c]
-      args:
-      - "git status"
-      - "ls -lah"
+      image:      golang:1.10
+      command:    [sh, -c]
+      args:       ["git status && ls -lah"]
       workingDir: /src
 
+    outputs:
+      artifacts:
+      - name:     git-clone-src-04
+        path:     /src
 

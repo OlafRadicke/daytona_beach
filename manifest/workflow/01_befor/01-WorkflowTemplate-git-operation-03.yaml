@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: git-operation-02
+  name: git-operation-03
 spec:
   templates:
-  - name: git-clone-02
+  - name: git-clone-03
     inputs:
       parameters:
         - name:   gitRepo
@@ -12,7 +12,7 @@ spec:
         - name:   gitBranch
           value:  "main"
       artifacts:
-      - name:     git-clone
+      - name:     git-clone-src-03
         path:     /src
         git:
           repo:   "{{inputs.parameters.gitRepo}}"
@@ -38,5 +38,3 @@ spec:
       - "git status"
       - "ls -lah"
       workingDir: /src
-
-

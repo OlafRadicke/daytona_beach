@@ -22,9 +22,10 @@ TODOs
 - [X] 0.0.x - Enable CronWorkflow
 - [X] 0.2.x - Vault Server
 - [X] 0.3.x - Checkout OpenTofu code
-- [ ] 0.4.x - run OpenTofu code
-- [ ] 0.5.x - Add OpenTofu backend
-- [ ] 0.6.x - Integrate SOPS: Secrets OPerationS
+- [ ] 0.4.x - handle artifacts
+- [ ] 0.5.x - run OpenTofu code
+- [ ] 0.6.x - Add OpenTofu backend
+- [ ] 0.7.x - Integrate SOPS: Secrets OPerationS
 
 HOW-TO
 ------

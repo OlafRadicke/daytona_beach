@@ -23,8 +23,8 @@ spec:
               template: get-now
         - - name: clone-terraform-code-from-git
             templateRef:
-              name: git-operation-02
-              template: git-clone-02
+              name: git-operation-03
+              template: git-clone-03
             arguments:
               parameters:
               - name: gitRepo
