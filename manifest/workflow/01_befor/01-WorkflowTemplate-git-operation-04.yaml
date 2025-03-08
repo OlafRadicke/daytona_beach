@@ -4,52 +4,79 @@ metadata:
   name:           git-operation-04
 spec:
   templates:
-  - name:         git-clone-04
-    inputs:
-      parameters:
-        - name:   gitRepo
-          value:  "https://github.com/argoproj/argo-workflows.git"
-        - name:   gitBranch
-          value:  "main"
 
-      artifacts:
-      - name:     git-clone-src-04
-        path:     /src
-        git:
-          repo:   "{{inputs.parameters.gitRepo}}"
-          # revision: "{{inputs.parameters.gitBranch}}"
-          branch: "{{inputs.parameters.gitBranch}}"
-          singleBranch: true
-          # depth:  1
+    - name:       get-now
+      container:
+        image:    alpine:3.6
+        command:  [sh, -c]
+        args:     ["date"]
 
-          # usernameSecret:
-          #   name: github-creds
-          #   key: username
-          # passwordSecret:
-          #   name: github-creds
-          #   key: password
-          # sshPrivateKeySecret:
-          #   name: github-creds
-          #   key: ssh-private-key
-          # depth: 1
-          # fetch: refs/meta/*
-          # singleBranch: true
-          # branch: my-branch
-          # revision: "{{inputs.parameters.gitBranch}}"
+    - name:         get-clone
+      inputs:
+        parameters:
+          - name:   gitRepo
+            value:  "https://github.com/argoproj/argo-workflows.git"
+          - name:   gitBranch
+            value:  "main"
+        # #this is the git fetch magic as an init container in the first step
+        # initContainers:
+        #   - image: k8s.gcr.io/git-sync:v3.1.6
+        #     args:
+        #       - "--repo=git@github.com:<YOUR-ORG>/<YOUR-REPO>.git"
+        #       - "--root=/workdir/root"
+        #       - "--max-sync-failures=3"
+        #       - "--timeout=200"
+        #       - "--branch=main"
+        #       - "--ssh"
+        #       - "--one-time"
+        #     name: git-data
+        #     volumeMounts:
+        #       - name: repo-root
+        #         mountPath: /workdir ##
+        #       - name: git-secret
+        #         mountPath: /etc/git-secret
+      container:
+        image:      golang:1.10
+        command:    [sh, -c]
+        args:       ["ls -lah && git status"]
+        workingDir: /src
+        volumeMounts:                     # same syntax as k8s Pod spec
+        - name:     argo-workdir
+          mountPath: /src
 
-    container:
-      image:      golang:1.10
-      command:    [sh, -c]
-      args:       ["git status && ls -lah"]
-      workingDir: /src
+        artifacts:
+        - name:     git-clone-src-04
+          path:     /src
+          git:
+            repo:   "{{inputs.parameters.gitRepo}}"
+            # revision: "{{inputs.parameters.gitBranch}}"
+            branch: "{{inputs.parameters.gitBranch}}"
+            singleBranch: true
+            # depth:  1
 
-    outputs:
-      artifacts:
-      - name:     out-git-clone-src
-        path:     /src
-        # # archive:
-        # #   none: {}
-        # archive:
-        #   tar:
-        #     compressionLevel: 0
+            # usernameSecret:
+            #   name: github-creds
+            #   key: username
+            # passwordSecret:
+            #   name: github-creds
+            #   key: password
+            # sshPrivateKeySecret:
+            #   name: github-creds
+            #   key: ssh-private-key
+            # depth: 1
+            # fetch: refs/meta/*
+            # singleBranch: true
+            # branch: my-branch
+            # revision: "{{inputs.parameters.gitBranch}}"
+          # inline:
+          #   container:
+          #     image:      golang:1.10
+          #     command:    [sh, -c]
+          #     args:       ["ls -lah && git status"]
+          #     workingDir: /src
+          #     volumeMounts:                     # same syntax as k8s Pod spec
+          #     - name:     argo-workdir
+          #       mountPath: /src
+
+
 

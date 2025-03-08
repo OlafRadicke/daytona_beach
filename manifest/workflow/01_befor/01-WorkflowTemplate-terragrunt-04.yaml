@@ -19,7 +19,7 @@ spec:
       container:
         image:    alpine/terragrunt:1.10.3
         command:  [sh, -c]
-        args:     ["ls -lah"]
+        args:     ["ls -lah /src"]
 
 
     - name:       get-content-of-dir-2
@@ -35,3 +35,14 @@ spec:
         image:    alpine/terragrunt:1.10.3
         command:  [sh, -c]
         args:     ["ls -lah"]
+
+
+
+    - name:       get-content-of-dir-3
+      container:
+        image:    alpine/terragrunt:1.10.3
+        command:  [sh, -c]
+        args:     ["ls -lah /src"]
+        volumeMounts:                     # same syntax as k8s Pod spec
+        - name: argo-workdir
+          mountPath: /src

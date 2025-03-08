@@ -18,4 +18,5 @@ spec:
       container:
         image:    alpine:3.6
         command:  [sh, -c]
-        args:     ["ls -lah"]
+        args:     ["ls -lah /src"]
+

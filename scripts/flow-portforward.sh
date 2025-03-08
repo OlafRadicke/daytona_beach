@@ -9,5 +9,6 @@ MY_SERVICE=foo
 MY_PORT=2746
 
 echo "go to: http://localhost:${MY_PORT}/"
+kubectx atlantic-ocean
 kubectl -n ${MY_NAMESPACE} port-forward service/argo-server ${MY_PORT}:${MY_PORT}
 # firefox http://localhost:${MY_PORT}/ &&

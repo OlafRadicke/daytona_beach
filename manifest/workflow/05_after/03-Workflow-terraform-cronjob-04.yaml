@@ -1,39 +1,41 @@
 apiVersion: argoproj.io/v1alpha1
-kind: CronWorkflow
+kind: Workflow
 metadata:
-  name:                 terraform-cronjob-04
+  name:                 terraform-job-04
 spec:
-  schedule:             "*/1 * * * *"
-  concurrencyPolicy:    "Forbid"
+  entrypoint:           start-terraform-job-04
+  # schedule:             "*/1 * * * *"
+  # concurrencyPolicy:    "Forbid"
   # startingDeadlineSeconds: 0
-  successfulJobsHistoryLimit: 6
-  failedJobsHistoryLimit: 3
+  # successfulJobsHistoryLimit: 6
+  # failedJobsHistoryLimit: 3
   volumeClaimTemplates:
   - metadata:
-      name: argo-workdir
+      name:             argo-workdir
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes:      [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 1Gi
+          storage:      1Gi
 
-  workflowSpec:
-    entrypoint:         start-terraform-cronjob-04
-    archiveLogs:        true
+  # workflowSpec:
+  #   entrypoint:         start-terraform-job-04
+  #   archiveLogs:        true
 
-    templates:
-      - name:           start-terraform-cronjob-04
-        steps:
+  templates:
+    - name:           start-terraform-job-04
+      steps:
 
         - - name:       get-date
             templateRef:
               name:     get-date-04
               template: get-now
 
+
         - - name:       clone-terraform-code-from-git
             templateRef:
               name:     git-operation-04
-              template: git-clone
+              template: get-clone
             arguments:
               parameters:
               - name:   gitRepo
@@ -48,10 +50,10 @@ spec:
 
 
 
-        # - - name:       list-content-of-terragrunt-dir-2
-        #     templateRef:
-        #       name:     terragrunt-operation-04
-        #       template: get-content-of-dir-3
+        - - name:       list-content-of-terragrunt-dir-2
+            templateRef:
+              name:     terragrunt-operation-04
+              template: get-content-of-dir-3
 
 
         # - - name:       get-version-of-terragrunt
