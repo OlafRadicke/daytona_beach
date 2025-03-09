@@ -5,7 +5,7 @@ metadata:
 spec:
   templates:
 
-    - name:         get-clone
+    - name:         git-clone
       inputs:
         parameters:
           - name:   gitRepo

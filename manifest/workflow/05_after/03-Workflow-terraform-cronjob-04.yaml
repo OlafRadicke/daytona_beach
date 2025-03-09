@@ -4,11 +4,6 @@ metadata:
   name:                 terraform-job-04
 spec:
   entrypoint:           start-terraform-job-04
-  # schedule:             "*/1 * * * *"
-  # concurrencyPolicy:    "Forbid"
-  # startingDeadlineSeconds: 0
-  # successfulJobsHistoryLimit: 6
-  # failedJobsHistoryLimit: 3
   volumeClaimTemplates:
   - metadata:
       name:             argo-workdir
@@ -18,12 +13,8 @@ spec:
         requests:
           storage:      1Gi
 
-  # workflowSpec:
-  #   entrypoint:         start-terraform-job-04
-  #   archiveLogs:        true
-
   templates:
-    - name:           start-terraform-job-04
+    - name:             start-terraform-job-04
       steps:
 
         - - name:       get-date
@@ -31,11 +22,10 @@ spec:
               name:     get-date-04
               template: get-now
 
-
         - - name:       clone-terraform-code-from-git
             templateRef:
               name:     git-operation-04
-              template: get-clone
+              template: git-clone
             arguments:
               parameters:
               - name:   gitRepo
