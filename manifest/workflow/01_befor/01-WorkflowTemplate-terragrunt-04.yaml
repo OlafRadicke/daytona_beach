@@ -4,15 +4,20 @@ metadata:
   name:           terragrunt-operation-04
 spec:
   templates:
+
     - name:       get-version
       container:
         image:    alpine/terragrunt:1.10.3
         command:  [terraform]
         args:
                   - "version"
+        workingDir: /src/clone
+        volumeMounts:                     # same syntax as k8s Pod spec
+        - name: argo-workdir
+          mountPath: /src
 
 
-    - name:       get-content-of-dir-3
+    - name:       get-content-of-dir
       container:
         image:    alpine/terragrunt:1.10.3
         command:  [sh, -c]

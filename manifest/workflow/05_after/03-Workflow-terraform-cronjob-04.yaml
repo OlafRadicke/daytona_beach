@@ -43,21 +43,14 @@ spec:
               - name:   gitBranch
                 value:  "main"
 
-        # - - name:       get-date
-        #     templateRef:
-        #       name:     get-date-04
-        #       template: get-now
-
-
-
-        - - name:       list-content-of-terragrunt-dir-2
+        - - name:       list-content-of-terragrunt-dir
             templateRef:
               name:     terragrunt-operation-04
-              template: get-content-of-dir-3
+              template: get-content-of-dir
 
 
-        # - - name:       get-version-of-terragrunt
-        #     templateRef:
-        #       name:     terragrunt-operation-04
-        #       template: get-version
+        - - name:       get-version-of-terragrunt
+            templateRef:
+              name:     terragrunt-operation-04
+              template: get-version
 
