@@ -2,7 +2,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: my-git-checkout-volume
+  name: tofu-backend
 spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:
