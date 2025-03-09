@@ -1,7 +1,7 @@
-apiVersion: argoproj.io/v1alpha1
-kind: WorkflowTemplate
+apiVersion:         argoproj.io/v1alpha1
+kind:               WorkflowTemplate
 metadata:
-  name:           git-operation-04
+  name:             git-operation-04
 spec:
   templates:
 
@@ -11,19 +11,19 @@ spec:
           - name:   gitRepo
           - name:   gitBranch
       initContainers:
-        - image: k8s.gcr.io/git-sync:v3.1.6
+        - image:    k8s.gcr.io/git-sync:v3.1.6
           args:
-            - "--repo={{inputs.parameters.gitRepo}}"
-            - "--root=/src/clone"
-            - "--max-sync-failures=3"
-            - "--timeout=200"
-            - "--branch={{inputs.parameters.gitBranch}}"
-            # - "--ssh"
-            - "--one-time"
-          name: git-data
+                    - "--repo={{inputs.parameters.gitRepo}}"
+                    - "--root=/src/clone"
+                    - "--max-sync-failures=3"
+                    - "--timeout=200"
+                    - "--branch={{inputs.parameters.gitBranch}}"
+                    # - "--ssh"
+                    - "--one-time"
+          name:     git-data
           volumeMounts:
             - name: argo-workdir
-              mountPath: /src ##
+              mountPath: /src
             # - name: git-secret
             #   mountPath: /etc/git-secret
       container:

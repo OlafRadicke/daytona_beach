@@ -1,5 +1,5 @@
-apiVersion: argoproj.io/v1alpha1
-kind: WorkflowTemplate
+apiVersion:       argoproj.io/v1alpha1
+kind:             WorkflowTemplate
 metadata:
   name:           get-date-04
 spec:
