@@ -1,4 +1,4 @@
-# Define Kubernetes PVC
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -7,4 +7,5 @@ spec:
   accessModes: [ "ReadWriteOnce" ]
   resources:
     requests:
-      storage: 100Mi
+      storage: 500Mi
+
