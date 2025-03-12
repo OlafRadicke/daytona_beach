@@ -29,7 +29,7 @@ spec:
       container:
         image:      golang:1.10
         command:    [sh, -c]
-        args:       ["ls -lah && git branch && git checkout {{inputs.parameters.gitBranch}} && git status && ls -lah"]
+        args:       ["ls -lah && git branch && git checkout {{inputs.parameters.gitBranch}} && git status && ls -lah  && ls -lah terraform/examples "]
         workingDir: /src/clone
         volumeMounts:
         - name:     argo-workdir

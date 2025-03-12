@@ -24,7 +24,7 @@ TODOs
 - [X] 0.3.x - Checkout OpenTofu code
 - [X] 0.4.x - Handle with artifacts / PVCs
 - [X] 0.5.x - Add OpenTofu backend (PVC/local `-backend-config=PATH`)
-- [ ] 0.6.x - run OpenTofu code
+- [X] 0.6.x - run OpenTofu code
 - [ ] 0.7.x - Integrate SOPS: Secrets OPerationS
 
 HOW-TO

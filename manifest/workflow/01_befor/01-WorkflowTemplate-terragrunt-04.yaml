@@ -34,7 +34,7 @@ spec:
         command:      [terragrunt]
         args:
                       - "version"
-        workingDir:   /src/clone
+        workingDir:   /src/clone/terraform/examples
         volumeMounts:
         - name:       argo-workdir
           mountPath:  /src
@@ -42,7 +42,7 @@ spec:
     - name:           run-terraform-init
       container:
         image:        alpine/terragrunt:1.10.3
-        command:      [terragrunt]
+        command:      ["terragrunt"]
         args:
                       - "init"
                       - "-no-color"
@@ -56,9 +56,10 @@ spec:
     - name:           run-terraform-plan
       container:
         image:        alpine/terragrunt:1.10.3
-        command:      [terraform]
+        command:      ["terragrunt"]
         args:
-                      - "plan -no-color"
+                      - "plan"
+                      - "-no-color"
         workingDir:   /src/clone/terraform/examples
         volumeMounts:
         - name:       tofu-backend-vol
@@ -69,9 +70,11 @@ spec:
     - name:           run-terraform-apply
       container:
         image:        alpine/terragrunt:1.10.3
-        command:      [terraform]
+        command:      ["terragrunt"]
         args:
-                      - "apply -auto-approve --terragrunt-no-color"
+                      - "apply"
+                      - "-auto-approve"
+                      - "--terragrunt-no-color"
         workingDir:   /src/clone/terraform/examples
         volumeMounts:
         - name:       tofu-backend-vol

@@ -21,6 +21,10 @@ spec:
         resources:
           requests:
             storage:    1Gi
+    volumes:
+      - name:             tofu-backend-vol
+        persistentVolumeClaim:
+          claimName:      tofu-backend
 
     templates:
       - name:           start-terraform-cronjob
