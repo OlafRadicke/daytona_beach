@@ -54,4 +54,17 @@ spec:
               template: get-version
 
 
+        - - name:       run-terraform-init
+            templateRef:
+              name:     terragrunt-operation-04
+              template: run-terraform-init
 
+        - - name:       run-terraform-plan
+            templateRef:
+              name:     terragrunt-operation-04
+              template: run-terraform-plan
+
+        - - name:       run-terraform-apply
+            templateRef:
+              name:     terragrunt-operation-04
+              template: run-terraform-apply
