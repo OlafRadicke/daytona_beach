@@ -14,6 +14,7 @@ KNOWN ISSUES
 ------------
 
 - The workflows fail if the templates are not installed first.
+- The Vault Server lost his state in dev mode (so, don't stopped during your experiments).
 
 
 TODOs

@@ -1,0 +1,22 @@
+apiVersion:       argoproj.io/v1alpha1
+kind:             WorkflowTemplate
+metadata:
+  name:           sops-operation
+spec:
+  templates:
+    - name:       get-now
+      container:
+        image:    alpine:3.6
+        command:  [sh, -c]
+        args:     ["date"]
+
+    - name:       get-conten-of-dir
+      inputs:
+        artifacts:
+        - name:   git-clone-src-04
+          path:   /src
+      container:
+        image:    alpine:3.6
+        command:  [sh, -c]
+        args:     ["ls -lah /src"]
+
