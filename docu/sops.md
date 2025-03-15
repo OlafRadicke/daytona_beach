@@ -1,6 +1,7 @@
 SOPS
 ====
 
+
 Download: [on github](https://github.com/getsops/sops/releases)
 
 
@@ -11,7 +12,17 @@ Doku: [Encrypting using Hashicorp Vault](https://github.com/getsops/sops/?tab=re
 
 More information about Vault Server setup see: [docu/vault-server.md](vault-server.md)
 
+Used client image
+-----------------
 
+The used Docker image is build with the *Actions* ci build pipeline. See [.github/workflows](../.github/workflows)
+You finde the result on [hub.docker.com](https://hub.docker.com/repository/docker/olafradicke/alpine-sops/general)
+
+```bash
+podman run --rm -it olafradicke/alpine-sops:0.7.2 --version
+podman run --rm -it docker.io/olafradicke/alpine-sops:0.7.2  --version
+
+```
 
 Use Vault Server
 ----------------
