@@ -12,6 +12,8 @@ $ scripts/vault-server-install.sh
 
 But don't use this for produktiv. This example use the token in clear text!
 
+Container docu see on [hub.docker.com](https://hub.docker.com/r/hashicorp/vault)
+
 ### Init key
 
 ```bash
@@ -44,7 +46,10 @@ $ vault write sops/keys/firstkey type=rsa-4096
 Success! Data written to: sops/keys/firstkey
 ```
 
+Known issue
+-----------
 
+The Vault Docker image don't work with PVCs in Development mode!
 
 Troubleshooting
 ---------------

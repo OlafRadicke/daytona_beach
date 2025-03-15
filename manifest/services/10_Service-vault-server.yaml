@@ -6,8 +6,10 @@ metadata:
     app: vault-server
 spec:
   ports:
-  - port: 8200
-    name: vault
+  - name: http
+    protocol: TCP
+    port: 8200
+    targetPort: http
   clusterIP: None
   selector:
     app: vault-server
