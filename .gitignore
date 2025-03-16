@@ -4,3 +4,5 @@ terraform/examples-02/dev/.terragrunt-cache
 terraform/examples-02/prod/.terragrunt-cache
 terraform/examples-02/dev/.terragrunt-cache
 terraform/examples-02/dev/.terragrunt-cache
+terraform/examples-01/.terraform.lock.hcl
+terraform/examples-01/.terraform/
