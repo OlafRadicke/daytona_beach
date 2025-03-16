@@ -31,7 +31,20 @@ spec:
               template: get-vault-status
 
 #  git
+
         - - name:       clone-terraform-code-from-git
+            templateRef:
+              name:     git-operation-04
+              template: git-clone
+            arguments:
+              parameters:
+              - name:   gitRepo
+                value:  https://github.com/OlafRadicke/daytona_beach.git
+              - name:   gitBranch
+                value:  "main"
+
+
+        - - name:       clone-terraform-code-from-git-02
             templateRef:
               name:     git-operation
               template: git-clone
