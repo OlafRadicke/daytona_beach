@@ -8,6 +8,7 @@ A experimental repo for SOPS, TOFU and ArgoCD-Workflow exercises and experience.
 	- [TODOs](#todos)
 	- [HOW-TO](#how-to)
 		- [Helper scripts](#helper-scripts)
+	- [CI/CD](#cicd)
 	- [EXTERNAL DOCUMENTATION](#external-documentation)
 
 
@@ -46,6 +47,11 @@ Open #todo ...
 | flow-portforward.sh     | Create an Kubernetes portforwart to the Workflows WebGUI |
 | ci-install.sh           | Deployed the demo Workflows CI                           |
 | ci-remove.sh            | Remove the demo Workflows CI                             |
+
+CI/CD
+-----
+
+Github Action is used for building needed customized images.
 
 
 EXTERNAL DOCUMENTATION

@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} Build Docker Image
 on:
   push:
     tags:
-      - 'docker-image/*'
+      - '*-ci'
 jobs:
   build-sops-image:
     runs-on: ubuntu-latest
