@@ -15,6 +15,8 @@ RUN  adduser \
 	--no-create-home \
 	$USER
 
+
+
 USER $USER
 
 ENTRYPOINT ["sops"]
