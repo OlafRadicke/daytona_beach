@@ -15,7 +15,6 @@ spec:
           value: 'ChaNG_mE,plEAse!!'
         # command:  [sh, -c]
         args:     ["status"]
-        workingDir: /src/clone
-        volumeMounts:
-        - name:     argo-workdir
-          mountPath: /src
+        workingDir: /
+
+

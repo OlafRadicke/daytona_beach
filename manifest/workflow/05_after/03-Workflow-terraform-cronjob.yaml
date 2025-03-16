@@ -32,19 +32,8 @@ spec:
 
 #  git
 
+
         - - name:       clone-terraform-code-from-git
-            templateRef:
-              name:     git-operation-04
-              template: git-clone
-            arguments:
-              parameters:
-              - name:   gitRepo
-                value:  https://github.com/OlafRadicke/daytona_beach.git
-              - name:   gitBranch
-                value:  "main"
-
-
-        - - name:       clone-terraform-code-from-git-02
             templateRef:
               name:     git-operation
               template: git-clone
@@ -55,33 +44,33 @@ spec:
               - name:   gitBranch
                 value:  "main"
 
-# sops
-        - - name:       get-sops-version
-            templateRef:
-              name:     sops-operation
-              template: get-version
+# # sops
+#         - - name:       get-sops-version
+#             templateRef:
+#               name:     sops-operation
+#               template: get-version
 
-        - - name:       get-sops-conten-of-dir
-            templateRef:
-              name:     sops-operation
-              template: get-conten-of-dir
-# terragrunt
-        - - name:       get-terragrunt-version
-            templateRef:
-              name:     terragrunt-operation
-              template: get-terragrunt-version
+#         - - name:       get-sops-conten-of-dir
+#             templateRef:
+#               name:     sops-operation
+#               template: get-conten-of-dir
+# # terragrunt
+#         - - name:       get-terragrunt-version
+#             templateRef:
+#               name:     terragrunt-operation
+#               template: get-terragrunt-version
 
-        - - name:       run-terraform-init
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-init
+#         - - name:       run-terraform-init
+#             templateRef:
+#               name:     terragrunt-operation
+#               template: run-terraform-init
 
-        - - name:       run-terraform-plan
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-plan
+#         - - name:       run-terraform-plan
+#             templateRef:
+#               name:     terragrunt-operation
+#               template: run-terraform-plan
 
-        - - name:       run-terraform-apply
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-apply
+#         - - name:       run-terraform-apply
+#             templateRef:
+#               name:     terragrunt-operation
+#               template: run-terraform-apply

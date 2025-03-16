@@ -1,0 +1,42 @@
+apiVersion:             argoproj.io/v1alpha1
+kind:                   CronWorkflow
+metadata:
+  name:                 terraform-cronjob-04-debug
+spec:
+  schedule:             "*/1 * * * *"
+  concurrencyPolicy:    "Forbid"
+  # startingDeadlineSeconds: 0
+  successfulJobsHistoryLimit: 6
+  failedJobsHistoryLimit: 3
+
+  workflowSpec:
+    entrypoint:         start-terraform-cronjob-debug
+    archiveLogs:        true
+
+    volumeClaimTemplates:
+    - metadata:
+        name:           argo-workdir
+      spec:
+        accessModes:    [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage:    1Gi
+    volumes:
+      - name:             tofu-backend-vol
+        persistentVolumeClaim:
+          claimName:      tofu-backend
+
+    templates:
+      - name:           start-terraform-cronjob-debug
+        steps:
+
+        - - name:       clone-terraform-code-from-git
+            templateRef:
+              name:     git-operation-04
+              template: git-clone
+            arguments:
+              parameters:
+              - name:   gitRepo
+                value:  https://github.com/OlafRadicke/daytona_beach.git
+              - name:   gitBranch
+                value:  "main"
