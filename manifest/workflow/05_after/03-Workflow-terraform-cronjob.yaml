@@ -23,6 +23,13 @@ spec:
     - name:             start-terraform-job
       steps:
 
+# vault
+
+        - - name:       vault-operation
+            templateRef:
+              name:     vault-operation
+              template: get-vault-status
+
 #  git
         - - name:       clone-terraform-code-from-git
             templateRef:
@@ -34,13 +41,6 @@ spec:
                 value:  https://github.com/OlafRadicke/daytona_beach.git
               - name:   gitBranch
                 value:  "main"
-
-# vault
-
-        - - name:       vault-operation
-            templateRef:
-              name:     vault-operation
-              template: get-vault-status
 
 # sops
         - - name:       get-sops-version

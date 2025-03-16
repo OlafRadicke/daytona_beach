@@ -7,13 +7,13 @@ spec:
 
     - name:       get-vault-status
       container:
-        image:    docker.io/olafradicke/alpine-vault:0.7.2
+        image:    docker.io/olafradicke/alpine-vault:0.7.4-ci
         env:
         - name: VAULT_ADDR
-          value: 'http://vault-server.vault.svc.cluster.local:8200'
+          value: 'http://vault-server.vault:8200'
         - name: VAULT_TOKEN
           value: 'ChaNG_mE,plEAse!!'
-        command:  [sh, -c]
+        # command:  [sh, -c]
         args:     ["status"]
         workingDir: /src/clone
         volumeMounts:

@@ -11,7 +11,8 @@ spec:
           - name:   gitRepo
           - name:   gitBranch
       initContainers:
-        - image:    k8s.gcr.io/git-sync:v3.1.6
+        - name:     git-data
+          image:    k8s.gcr.io/git-sync:v3.1.6
           args:
                     - "--repo={{inputs.parameters.gitRepo}}"
                     - "--root=/src/clone"
@@ -20,7 +21,6 @@ spec:
                     - "--branch={{inputs.parameters.gitBranch}}"
                     # - "--ssh"
                     - "--one-time"
-          name:     git-data
           volumeMounts:
             - name: argo-workdir
               mountPath: /src
@@ -29,7 +29,7 @@ spec:
       container:
         image:      golang:1.10
         command:    [sh, -c]
-        args:       ["ls -lah && git branch && git checkout {{inputs.parameters.gitBranch}} && git status && ls -lah  && ls -lah terraform/examples "]
+        args:       ["pwd && ls -lah && git branch && git checkout {{inputs.parameters.gitBranch}} && git status && ls -lah  && ls -lah terraform/examples "]
         workingDir: /src/clone
         volumeMounts:
         - name:     argo-workdir
