@@ -1,36 +1,41 @@
-apiVersion:       argoproj.io/v1alpha1
-kind:             WorkflowTemplate
+apiVersion:         argoproj.io/v1alpha1
+kind:               WorkflowTemplate
 metadata:
-  name:           sops-operation
+  name:             sops-operation
 spec:
   templates:
-    - name:       get-version
+    - name:         get-version
       container:
-        image:    docker.io/olafradicke/alpine-sops:0.7.2
+        image:      docker.io/olafradicke/alpine-sops:0.7.2
         # command:  [sh, -c]
-        args:     ["--version"]
+        args:       ["--version"]
 
-    - name:       get-conten-of-dir
+    - name:         get-conten-of-dir
       container:
-        image:    docker.io/olafradicke/alpine-sops:0.7.2
-        command:  [sh, -c]
-        args:     ["ls -lah "]
-        workingDir: /src/clone
+        image:      docker.io/olafradicke/alpine-sops:0.7.2
+        command:    [sh, -c]
+        args:       ["ls -lah"]
+        workingDir: /src/clone/terraform/examples
         volumeMounts:
         - name:     argo-workdir
           mountPath: /src
 
-    - name:       get-vault-status
+    - name:         encrypt
       container:
-        image:    docker.io/olafradicke/alpine-vault:0.7.2
+        image:      docker.io/olafradicke/alpine-sops:0.7.2
         env:
-        - name: VAULT_ADDR
-          value: 'http://vault-server.vault.svc.cluster.local:8200'
-        - name: VAULT_TOKEN
-          value: 'ChaNG_mE,plEAse!!'
-        command:  [sh, -c]
-        args:     ["status"]
-        workingDir: /src/clone
+        - name:     VAULT_ADDR
+          value:    'http://vault-server.vault:8200'
+        - name:     VAULT_TOKEN
+          value:    'ChaNG_mE,plEAse!!'
+        args:
+                    - "encrypt"
+                    - "--hc-vault-transit"
+                    - "$VAULT_ADDR/v1/sops/keys/default"
+                    - "examples/hello.test.tf"
+                    - ">"
+                    - "./crypted/hello.test.tf"
+        workingDir: terraform/examples
         volumeMounts:
         - name:     argo-workdir
           mountPath: /src

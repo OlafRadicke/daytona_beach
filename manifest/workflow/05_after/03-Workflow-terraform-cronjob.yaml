@@ -25,7 +25,7 @@ spec:
 
 # vault
 
-        - - name:       vault-operation
+        - - name:       vault-get-status
             templateRef:
               name:     vault-operation
               template: get-vault-status
@@ -44,33 +44,50 @@ spec:
               - name:   gitBranch
                 value:  "main"
 
+# vault
+
+        - - name:       vault-enable-transit
+            templateRef:
+              name:     vault-operation
+              template: enable-transit
+            continueOn:
+              failed: true
+
+        - - name:       vault-create-key
+            templateRef:
+              name:     vault-operation
+              template: create-key
+
 # sops
-        - - name:       get-sops-version
+        - - name:       sops-get-version
             templateRef:
               name:     sops-operation
               template: get-version
 
-        - - name:       get-sops-conten-of-dir
+        - - name:       sops-get-conten-of-dir
             templateRef:
               name:     sops-operation
               template: get-conten-of-dir
+
+
+
 # terragrunt
-        - - name:       get-terragrunt-version
-            templateRef:
-              name:     terragrunt-operation
-              template: get-terragrunt-version
+        # - - name:       terragrunt-get-version
+        #     templateRef:
+        #       name:     terragrunt-operation
+        #       template: get-terragrunt-version
 
-        - - name:       run-terraform-init
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-init
+        # - - name:       terraform-run-init
+        #     templateRef:
+        #       name:     terragrunt-operation
+        #       template: run-terraform-init
 
-        - - name:       run-terraform-plan
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-plan
+        # - - name:       terraform-run-plan
+        #     templateRef:
+        #       name:     terragrunt-operation
+        #       template: run-terraform-plan
 
-        - - name:       run-terraform-apply
-            templateRef:
-              name:     terragrunt-operation
-              template: run-terraform-apply
+        # - - name:       terraform-run-apply
+        #     templateRef:
+        #       name:     terragrunt-operation
+        #       template: run-terraform-apply

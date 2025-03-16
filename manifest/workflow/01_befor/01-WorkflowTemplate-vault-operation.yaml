@@ -1,20 +1,57 @@
-apiVersion:       argoproj.io/v1alpha1
-kind:             WorkflowTemplate
+apiVersion:         argoproj.io/v1alpha1
+kind:               WorkflowTemplate
 metadata:
-  name:           vault-operation
+  name:             vault-operation
 spec:
   templates:
 
-    - name:       get-vault-status
+    - name:         get-vault-status
       container:
-        image:    docker.io/olafradicke/alpine-vault:0.7.4-ci
+        image:      docker.io/olafradicke/alpine-vault:0.7.4-ci
         env:
-        - name: VAULT_ADDR
-          value: 'http://vault-server.vault:8200'
-        - name: VAULT_TOKEN
-          value: 'ChaNG_mE,plEAse!!'
+        - name:     VAULT_ADDR
+          value:    'http://vault-server.vault:8200'
+        - name:     VAULT_TOKEN
+          value:    'ChaNG_mE,plEAse!!'
         # command:  [sh, -c]
-        args:     ["status"]
+        args:       ["status"]
         workingDir: /
 
+    - name:         enable-transit
+      container:
+        image:      docker.io/olafradicke/alpine-vault:0.7.4-ci
+        env:
+        - name:     VAULT_ADDR
+          value:    'http://vault-server.vault:8200'
+        - name:     VAULT_TOKEN
+          value:    'ChaNG_mE,plEAse!!'
+        # command:    ["vault"]
+        args:
+                    - "secrets"
+                    - "enable"
+                    - "-path=sops"
+                    - "transit"
+                    - "|"
+                    - "true"
+        workingDir: /src/clone/terraform/examples
+        volumeMounts:
+        - name:     argo-workdir
+          mountPath: /src
 
+
+    - name:         create-key
+      container:
+        image:      docker.io/olafradicke/alpine-vault:0.7.4-ci
+        env:
+        - name:     VAULT_ADDR
+          value:    'http://vault-server.vault:8200'
+        - name:     VAULT_TOKEN
+          value:    'ChaNG_mE,plEAse!!'
+        args:
+                    - "write"
+                    - "sops/keys/default"
+                    - "type=rsa-4096"
+        workingDir: /src/clone/terraform/examples
+        volumeMounts:
+        - name:     argo-workdir
+          mountPath: /src
