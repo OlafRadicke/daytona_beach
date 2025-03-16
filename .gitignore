@@ -1,2 +1,6 @@
-terraform/examples/.terraform
-terraform/examples/.terraform.lock.hcl
+terraform/examples-02/.terraform
+terraform/examples-02/.terraform.lock.hcl
+terraform/examples-02/dev/.terragrunt-cache
+terraform/examples-02/prod/.terragrunt-cache
+terraform/examples-02/dev/.terragrunt-cache
+terraform/examples-02/dev/.terragrunt-cache

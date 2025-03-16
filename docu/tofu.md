@@ -42,5 +42,5 @@ $ podman run -it --rm \
   --workdir /src \
   --entrypoint terragrunt \
   alpine/terragrunt:1.10.3 \
-  run-all -backend-config=backend.tf apply
+  run-all apply
 ```
