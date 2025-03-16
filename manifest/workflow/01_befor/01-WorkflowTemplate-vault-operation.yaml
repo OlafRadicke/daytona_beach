@@ -1,24 +1,9 @@
 apiVersion:       argoproj.io/v1alpha1
 kind:             WorkflowTemplate
 metadata:
-  name:           sops-operation
+  name:           vault-operation.
 spec:
   templates:
-    - name:       get-version
-      container:
-        image:    docker.io/olafradicke/alpine-sops:0.7.2
-        # command:  [sh, -c]
-        args:     ["--version"]
-
-    - name:       get-conten-of-dir
-      container:
-        image:    docker.io/olafradicke/alpine-sops:0.7.2
-        command:  [sh, -c]
-        args:     ["ls -lah "]
-        workingDir: /src/clone
-        volumeMounts:
-        - name:     argo-workdir
-          mountPath: /src
 
     - name:       get-vault-status
       container:

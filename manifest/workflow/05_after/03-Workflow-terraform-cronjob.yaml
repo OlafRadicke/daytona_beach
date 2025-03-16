@@ -4,6 +4,7 @@ metadata:
   name:                 terraform-job-04
 spec:
   entrypoint:           start-terraform-job-04
+  # Temp pvc
   volumeClaimTemplates:
     - metadata:
         name:           argo-workdir
@@ -12,6 +13,7 @@ spec:
         resources:
           requests:
             storage:    1Gi
+  # Persistent pvc
   volumes:
     - name:             tofu-backend-vol
       persistentVolumeClaim:
@@ -20,12 +22,12 @@ spec:
   templates:
     - name:             start-terraform-job-04
       steps:
-
+#  date
         # - - name:       get-date
         #     templateRef:
         #       name:     get-date-04
         #       template: get-now
-
+#  git
         - - name:       clone-terraform-code-from-git
             templateRef:
               name:     git-operation-04
@@ -37,12 +39,20 @@ spec:
               - name:   gitBranch
                 value:  "main"
 
-        # - - name:       list-content-of-terragrunt-dir
-        #     templateRef:
-        #       name:     terragrunt-operation-04
-        #       template: get-content-of-dir
+# vault
 
 
+# sops
+        - - name:       get-sops-version
+            templateRef:
+              name:     sops-operation
+              template: get-version
+
+        - - name:       get-sops-conten-of-dir
+            templateRef:
+              name:     sops-operation
+              template: get-conten-of-dir
+# terragrunt
         - - name:       get-terragrunt-version
             templateRef:
               name:     terragrunt-operation-04

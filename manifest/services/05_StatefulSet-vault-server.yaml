@@ -25,7 +25,7 @@ spec:
           name: http
         env:
         - name: VAULT_DEV_ROOT_TOKEN_ID
-          value: 'ChaNG_mY'
+          value: 'ChaNG_mE,plEAse!!'
         - name: VAULT_LOCAL_CONFIG
           value: '{"storage": {"file": {"path": "/vault/file"}}, "listener": [{"tcp": { "address": "0.0.0.0:8202", "tls_disable": true}}], "default_lease_ttl": "168h", "max_lease_ttl": "720h", "ui": true}'
         resources:
