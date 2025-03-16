@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  name:                 terraform-job-04
+  name:                 terraform-job
 spec:
-  entrypoint:           start-terraform-job-04
+  entrypoint:           start-terraform-job
   # Temp pvc
   volumeClaimTemplates:
     - metadata:
@@ -20,17 +20,13 @@ spec:
         claimName:      tofu-backend
 
   templates:
-    - name:             start-terraform-job-04
+    - name:             start-terraform-job
       steps:
-#  date
-        # - - name:       get-date
-        #     templateRef:
-        #       name:     get-date-04
-        #       template: get-now
+
 #  git
         - - name:       clone-terraform-code-from-git
             templateRef:
-              name:     git-operation-04
+              name:     git-operation
               template: git-clone
             arguments:
               parameters:
@@ -41,6 +37,10 @@ spec:
 
 # vault
 
+        - - name:       vault-operation
+            templateRef:
+              name:     vault-operation
+              template: get-vault-status
 
 # sops
         - - name:       get-sops-version
@@ -55,20 +55,20 @@ spec:
 # terragrunt
         - - name:       get-terragrunt-version
             templateRef:
-              name:     terragrunt-operation-04
+              name:     terragrunt-operation
               template: get-terragrunt-version
 
         - - name:       run-terraform-init
             templateRef:
-              name:     terragrunt-operation-04
+              name:     terragrunt-operation
               template: run-terraform-init
 
         - - name:       run-terraform-plan
             templateRef:
-              name:     terragrunt-operation-04
+              name:     terragrunt-operation
               template: run-terraform-plan
 
         - - name:       run-terraform-apply
             templateRef:
-              name:     terragrunt-operation-04
+              name:     terragrunt-operation
               template: run-terraform-apply

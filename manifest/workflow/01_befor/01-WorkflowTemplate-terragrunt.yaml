@@ -1,7 +1,7 @@
 apiVersion:           argoproj.io/v1alpha1
 kind:                 WorkflowTemplate
 metadata:
-  name:               terragrunt-operation-04
+  name:               terragrunt-operation
 spec:
   templates:
 

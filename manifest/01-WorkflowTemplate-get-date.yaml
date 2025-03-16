@@ -1,7 +1,7 @@
 apiVersion:       argoproj.io/v1alpha1
 kind:             WorkflowTemplate
 metadata:
-  name:           get-date-04
+  name:           get-date
 spec:
   templates:
     - name:       get-now
@@ -13,7 +13,7 @@ spec:
     - name:       get-conten-of-dir
       inputs:
         artifacts:
-        - name:   git-clone-src-04
+        - name:   git-clone-src
           path:   /src
       container:
         image:    alpine:3.6
