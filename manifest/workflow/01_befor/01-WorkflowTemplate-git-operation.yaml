@@ -13,14 +13,28 @@ spec:
       initContainers:
         - name:     git-data
           image:    k8s.gcr.io/git-sync:v3.1.6
+          # env:
+          # - name:   GIT_SYNC_REPO
+          #   value:  "{{inputs.parameters.gitRepo}}"
+          # - name:   GIT_SYNC_BRANCH
+          #   value:  "{{inputs.parameters.gitBranch}}"
+          # - name:   GIT_SYNC_ROOT
+          #   value:  "/src/clone"
+          # - name:   GIT_SYNC_DEST
+          #   value:  "/src/clone"
+          # - name:   GIT_SYNC_ONE_TIME
+          #   value:  "true"
+          # - name:   GIT_SYNC_DEPTH
+          #   value:  "1"
           args:
+                    - "--one-time"
+                    - "--timeout=200"
                     - "--repo={{inputs.parameters.gitRepo}}"
                     - "--root=/src/clone"
                     - "--max-sync-failures=3"
-                    - "--timeout=200"
                     - "--branch={{inputs.parameters.gitBranch}}"
+                    # - "-depth 2"
                     # - "--ssh"
-                    - "--one-time"
           volumeMounts:
             - name: argo-workdir
               mountPath: /src
@@ -29,7 +43,15 @@ spec:
       container:
         image:      golang:1.10
         command:    [sh, -c]
-        args:       ["pwd && ls -lah && git branch && git checkout {{inputs.parameters.gitBranch}} && git status && ls -lah  && ls -lah terraform/examples "]
+        args:
+                      - |
+                          pwd \
+                          && ls -lah \
+                          && git branch \
+                          && git checkout {{inputs.parameters.gitBranch}} \
+                          && git status \
+                          && ls -lah terraform/examples-01
+        # args:       ["pwd && ls -lah && git branch && git checkout {{inputs.parameters.gitBranch}} && git status && ls -lah"]
         workingDir: /src/clone
         volumeMounts:
         - name:     argo-workdir

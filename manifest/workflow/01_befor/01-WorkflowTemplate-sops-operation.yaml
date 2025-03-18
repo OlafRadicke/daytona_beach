@@ -15,12 +15,24 @@ spec:
         image:      docker.io/olafradicke/alpine-sops:0.7.2
         command:    [sh, -c]
         args:       ["ls -lah"]
-        workingDir: /src/clone/terraform/examples
+        workingDir: /src/clone/terraform/examples-01
         volumeMounts:
         - name:     argo-workdir
           mountPath: /src
 
-    - name:         encrypt
+
+    - name:         reset-server
+      container:
+        image:      docker.io/olafradicke/alpine-sops:0.7.2
+        args:
+                    - |
+                      set terragrunt.hcl.sops '["hc_vault"]["vault_address"]' '"http://vault-server.vault:8200"'
+        workingDir: /src/clone/terraform/examples-01
+        volumeMounts:
+        - name:     argo-workdir
+          mountPath: /src
+
+    - name:         decrypt
       container:
         image:      docker.io/olafradicke/alpine-sops:0.7.2
         env:
@@ -29,13 +41,11 @@ spec:
         - name:     VAULT_TOKEN
           value:    'ChaNG_mE,plEAse!!'
         args:
-                    - "encrypt"
-                    - "--hc-vault-transit"
-                    - "$VAULT_ADDR/v1/sops/keys/default"
-                    - "examples/hello.test.tf"
-                    - ">"
-                    - "./crypted/hello.test.tf"
-        workingDir: terraform/examples
+                    - |
+                      decrypt \
+                      --keyservice 'http://vault-server.vault:8200' \
+                      terragrunt.hcl.sops > terragrunt.hcl
+        workingDir: /src/clone/terraform/examples-01
         volumeMounts:
         - name:     argo-workdir
           mountPath: /src

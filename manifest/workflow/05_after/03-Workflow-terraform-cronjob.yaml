@@ -64,12 +64,25 @@ spec:
               name:     sops-operation
               template: get-version
 
-        - - name:       sops-get-conten-of-dir
+        - - name:       sops-get-conten-of-dir-before
             templateRef:
               name:     sops-operation
               template: get-conten-of-dir
 
+        - - name:       reset-server
+            templateRef:
+              name:     sops-operation
+              template: reset-server
 
+        - - name:       decrypt
+            templateRef:
+              name:     sops-operation
+              template: decrypt
+
+        - - name:       sops-get-conten-of-dir-after
+            templateRef:
+              name:     sops-operation
+              template: get-conten-of-dir
 
 # terragrunt
         # - - name:       terragrunt-get-version
