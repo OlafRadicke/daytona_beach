@@ -30,6 +30,8 @@ Use Vault Server
 ### Check with client
 
 ```bash
+$ export VAULT_ADDR='http://localhost:8200'
+$ export VAULT_TOKEN='ChaNG_mE,plEAse!!'
 $ vault status
 ```
 
@@ -61,8 +63,40 @@ Create one or more keys
 $ vault write sops/keys/firstkey type=rsa-4096
 ```
 
-### Encrypt file
+### Encrypt file with Server in Kubernetes
+
+Start portforwarding
 
 ```bash
-$ sops encrypt --hc-vault-transit $VAULT_ADDR/v1/sops/keys/firstkey examples/hello.test.tf > ./crypted/hello.test.tf
+$ scripts/vault-portforward.sh
 ```
+
+encrypt:
+
+```bash
+$ export VAULT_ADDR='http://localhost:8200'
+$ export VAULT_TOKEN='ChaNG_mE,plEAse!!'
+$ sops encrypt \
+  --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \
+  terraform/examples-01/sops-clear-text/terragrunt.hcl \
+  > terraform/examples-01/terragrunt.hcl.sops
+```
+
+### Decrypt  file with Server in Kubernetes
+
+Start portforwarding
+
+```bash
+$ scripts/vault-portforward.sh
+```
+
+Enter:
+
+```bash
+$ export VAULT_ADDR='http://localhost:8200'
+$ export VAULT_TOKEN='ChaNG_mE,plEAse!!'
+$ sops decrypt \
+  terraform/examples-01/terragrunt.hcl.sops \
+  > terraform/examples-01/terragrunt.hcl
+```
+
