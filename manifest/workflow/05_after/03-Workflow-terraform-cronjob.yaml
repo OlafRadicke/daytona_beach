@@ -69,10 +69,10 @@ spec:
               name:     sops-operation
               template: get-conten-of-dir
 
-        - - name:       reset-server
-            templateRef:
-              name:     sops-operation
-              template: reset-server
+        # - - name:       reset-server
+        #     templateRef:
+        #       name:     sops-operation
+        #       template: reset-server
 
         - - name:       decrypt
             templateRef:
