@@ -3,7 +3,3 @@ resource "null_resource" "default" {
     command = "echo 'Hello ${var.user_name}'"
   }
 }
-
-output "hello_world" {
-  value = "Hello ${var.user_name}"
-}

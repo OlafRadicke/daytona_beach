@@ -37,10 +37,13 @@ Open #todo ...
 
 ### Helper scripts
 
+In folder /scripts:
+
 | Script                  | Function                                                 |
 |-------------------------|----------------------------------------------------------|
 | vault-server-install.sh | Deploy an Vault-Server in dev mod                        |
 | vault-server-remove.sh  | Remove the Kubernetes Vault Server setup                 |
+| vault-portforward.sh    | Create an Kubernetes portforwart to the Vault server     |
 | flow-install.sh         | Installed the Workflows framework                        |
 | flow-deinstall.sh       | Deinstalled the Workflows framework                      |
 | flow-get.sh             | List stats of Workflow resources in Kubernetes           |
