@@ -43,6 +43,7 @@ spec:
         args:
                     - |
                       decrypt \
+                      --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \
                       --keyservice 'http://vault-server.vault:8200' \
                       terragrunt.hcl.sops > terragrunt.hcl
         workingDir: /src/clone/terraform/examples-01
