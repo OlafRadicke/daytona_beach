@@ -85,22 +85,28 @@ spec:
               template: get-conten-of-dir
 
 # terragrunt
-        # - - name:       terragrunt-get-version
-        #     templateRef:
-        #       name:     terragrunt-operation
-        #       template: get-terragrunt-version
 
-        # - - name:       terraform-run-init
-        #     templateRef:
-        #       name:     terragrunt-operation
-        #       template: run-terraform-init
+        - - name:       terragrunt-get-content-of-dir
+            templateRef:
+              name:     terragrunt-operation
+              template: get-content-of-dir
 
-        # - - name:       terraform-run-plan
-        #     templateRef:
-        #       name:     terragrunt-operation
-        #       template: run-terraform-plan
+        - - name:       terragrunt-get-version
+            templateRef:
+              name:     terragrunt-operation
+              template: get-terragrunt-version
 
-        # - - name:       terraform-run-apply
-        #     templateRef:
-        #       name:     terragrunt-operation
-        #       template: run-terraform-apply
+        - - name:       terraform-run-init
+            templateRef:
+              name:     terragrunt-operation
+              template: run-terraform-init
+
+        - - name:       terraform-run-plan
+            templateRef:
+              name:     terragrunt-operation
+              template: run-terraform-plan
+
+        - - name:       terraform-run-apply
+            templateRef:
+              name:     terragrunt-operation
+              template: run-terraform-apply
