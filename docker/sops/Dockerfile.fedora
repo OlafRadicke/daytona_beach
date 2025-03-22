@@ -4,9 +4,9 @@ ENV USER=sops-user
 ENV GROUPNAME=$USER
 ENV SOPS_VERSION=v3.9.4
 
-RUN dnf install -y \
-    curl \
-    bash
+# RUN dnf install -y \
+#     curl \
+#     bash
 
 # Download the binary
 RUN curl -LO https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64 \
