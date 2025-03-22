@@ -19,17 +19,21 @@ spec:
         - name:     argo-workdir
           mountPath: /src
 
-    - name:         decrypt
+    - name:         decrypt-with-secret
       container:
         image:      docker.io/olafradicke/fedora-sops:0.7.12-ci
         env:
         - name:     VAULT_ADDR
           value:    'http://vault-server.vault:8200'
         - name:     VAULT_TOKEN
-          value:    'ChaNG_mE,plEAse!!'
+          valueFrom:
+            secretKeyRef:
+              name: vault-token
+              key:  token
         command:    [sh, -c]
         args:
                     - |
+                      echo "$VAULT_TOKEN $VAULT_ADDR" &&
                       sops --decrypt \
                       --config <(echo '') \
                       --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \

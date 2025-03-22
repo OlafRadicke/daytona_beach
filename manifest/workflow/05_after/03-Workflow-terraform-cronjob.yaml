@@ -9,7 +9,8 @@ spec:
     parameters:
     - name:             example-path
       value:            /src/clone/terraform/examples-01
-  # Temp pvc
+  # A PVC for hand over the working directory between
+  # singles steps and his containers.
   volumeClaimTemplates:
     - metadata:
         name:           argo-workdir
@@ -18,7 +19,7 @@ spec:
         resources:
           requests:
             storage:    1Gi
-  # Persistent pvc
+  # Persistent pvc for the backend of Terraform/OpenTofu
   volumes:
     - name:             tofu-backend-vol
       persistentVolumeClaim:
@@ -27,7 +28,6 @@ spec:
   templates:
     - name:             start-terraform-job
       steps:
-
 # vault
 # Checks the connection to the Vaultserver
 
@@ -81,12 +81,13 @@ spec:
               name:     sops-operation
               template: get-conten-of-dir
 
+
         # Decrypt the secret with help of SOPS and the
         # Vault server.
-        - - name:       decrypt
+        - - name:       decrypt-with-secret
             templateRef:
               name:     sops-operation
-              template: decrypt
+              template: decrypt-with-secret
 
         # List the conten fof die example directory after
         # decryption operation.
@@ -95,7 +96,7 @@ spec:
               name:     sops-operation
               template: get-conten-of-dir
 
-# terragrunt
+# Terragrunt / Terraform / OpenTofu operations
 
         - - name:       terragrunt-get-content-of-dir
             templateRef:
