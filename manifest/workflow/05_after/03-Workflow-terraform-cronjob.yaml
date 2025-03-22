@@ -25,10 +25,10 @@ spec:
 
 # vault
 
-        - - name:       vault-get-status
-            templateRef:
-              name:     vault-operation
-              template: get-vault-status
+        # - - name:       vault-get-status
+        #     templateRef:
+        #       name:     vault-operation
+        #       template: get-vault-status
 
 #  git
 
@@ -46,28 +46,28 @@ spec:
 
 # vault
 
-        - - name:       vault-enable-transit
-            templateRef:
-              name:     vault-operation
-              template: enable-transit
-            continueOn:
-              failed: true
+        # - - name:       vault-enable-transit
+        #     templateRef:
+        #       name:     vault-operation
+        #       template: enable-transit
+        #     continueOn:
+        #       failed: true
 
-        - - name:       vault-create-key
-            templateRef:
-              name:     vault-operation
-              template: create-key
+        # - - name:       vault-create-key
+        #     templateRef:
+        #       name:     vault-operation
+        #       template: create-key
 
 # sops
-        - - name:       sops-get-version
-            templateRef:
-              name:     sops-operation
-              template: get-version
+        # - - name:       sops-get-version
+        #     templateRef:
+        #       name:     sops-operation
+        #       template: get-version
 
-        - - name:       sops-get-conten-of-dir-before
-            templateRef:
-              name:     sops-operation
-              template: get-conten-of-dir
+        # - - name:       sops-get-conten-of-dir-before
+        #     templateRef:
+        #       name:     sops-operation
+        #       template: get-conten-of-dir
 
         # - - name:       reset-server
         #     templateRef:
