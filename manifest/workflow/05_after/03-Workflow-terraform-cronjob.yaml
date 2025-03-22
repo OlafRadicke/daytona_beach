@@ -88,6 +88,8 @@ spec:
               name:     sops-operation
               template: decrypt
 
+        # List the conten fof die example directory after
+        # decryption operation.
         - - name:       sops-get-conten-of-dir-after
             templateRef:
               name:     sops-operation

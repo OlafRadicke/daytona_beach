@@ -14,7 +14,7 @@ spec:
                       - |
                         pwd
                         ls -lah
-        workingDir:   /src/clone/terraform/examples-01
+        workingDir:   "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:       argo-workdir
           mountPath:  /src
@@ -26,7 +26,7 @@ spec:
         command:      [terraform]
         args:
                       - "version"
-        workingDir:   /src/clone/terraform/examples-01
+        workingDir:   "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:       argo-workdir
           mountPath:  /src
@@ -37,7 +37,7 @@ spec:
         command:      [terragrunt]
         args:
                       - "version"
-        workingDir:   /src/clone/terraform/examples-01
+        workingDir:   "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:       argo-workdir
           mountPath:  /src
@@ -49,7 +49,7 @@ spec:
         args:
                       - "init"
                       - "-no-color"
-        workingDir:   /src/clone/terraform/examples-01
+        workingDir:   "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:       tofu-backend-vol
           mountPath:  /terraform/state/
@@ -63,7 +63,7 @@ spec:
         args:
                       - "plan"
                       - "-no-color"
-        workingDir:   /src/clone/terraform/examples-01
+        workingDir:   "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:       tofu-backend-vol
           mountPath:  /terraform/state/
@@ -78,7 +78,7 @@ spec:
                       - "apply"
                       - "-auto-approve"
                       - "--terragrunt-no-color"
-        workingDir:   /src/clone/terraform/examples-01
+        workingDir:   "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:       tofu-backend-vol
           mountPath:  /terraform/state/
