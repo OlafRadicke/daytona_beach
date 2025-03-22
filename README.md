@@ -5,31 +5,19 @@ A experimental repo for SOPS, TOFU and ArgoCD-Workflow exercises and experience.
 
 - [DAYTONA\_BEACH](#daytona_beach)
 	- [KNOWN ISSUES](#known-issues)
-	- [TODOs](#todos)
 	- [HOW-TO](#how-to)
 		- [Helper scripts](#helper-scripts)
 	- [CI/CD](#cicd)
+	- [TODOs](#todos)
 	- [EXTERNAL DOCUMENTATION](#external-documentation)
 
 
 KNOWN ISSUES
 ------------
 
-- The workflows fail if the templates are not installed first.
+- The `Workflow` fail if the `WorkflowTemplate` are not installed first.
 - The Vault Server lost his state in dev mode (so, don't stopped during your experiments).
 
-
-TODOs
------
-
-- [X] 0.0.x - Enable CronWorkflow
-- [X] 0.2.x - Vault Server
-- [X] 0.3.x - Checkout OpenTofu code
-- [X] 0.4.x - Handle with artifacts / PVCs
-- [X] 0.5.x - Add OpenTofu backend (PVC/local `-backend-config=PATH`)
-- [X] 0.6.x - run OpenTofu code
-- [X] 0.7.x - Integrate SOPS: Secrets OPerations
-- [ ] 0.8.x - Code cleanups
 
 HOW-TO
 ------
@@ -57,6 +45,19 @@ CI/CD
 
 Github Action is used for building needed customized images.
 
+
+TODOs
+-----
+
+- [X] 0.0.x - Enable CronWorkflow
+- [X] 0.2.x - Vault Server
+- [X] 0.3.x - Checkout OpenTofu code
+- [X] 0.4.x - Handle with artifacts / PVCs
+- [X] 0.5.x - Add OpenTofu backend (PVC/local `-backend-config=PATH`)
+- [X] 0.6.x - run OpenTofu code
+- [X] 0.7.x - Integrate SOPS: Secrets OPerations
+- [ ] 0.8.x - Code cleanups
+- [ ] 0.9.x - Documentation
 
 EXTERNAL DOCUMENTATION
 ----------------------

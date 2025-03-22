@@ -25,7 +25,7 @@ spec:
           value:    'http://vault-server.vault:8200'
         - name:     VAULT_TOKEN
           value:    'ChaNG_mE,plEAse!!'
-        # command:    ["vault"]
+        command:    ["vault"]
         args:
                     - "secrets"
                     - "enable"

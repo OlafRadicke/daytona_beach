@@ -7,7 +7,6 @@ spec:
     - name:         get-version
       container:
         image:      docker.io/olafradicke/alpine-sops:0.7.2
-        # command:  [sh, -c]
         args:       ["--version"]
 
     - name:         get-conten-of-dir
@@ -15,27 +14,13 @@ spec:
         image:      docker.io/olafradicke/alpine-sops:0.7.2
         command:    [sh, -c]
         args:       ["ls -lah"]
-        workingDir: /src/clone/terraform/examples-01
+        workingDir: "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:     argo-workdir
           mountPath: /src
-
-
-    - name:         reset-server
-      container:
-        image:      docker.io/olafradicke/alpine-sops:0.7.2
-        args:
-                    - |
-                      set terragrunt.hcl.sops '["hc_vault"]["vault_address"]' '"http://vault-server.vault:8200"'
-        workingDir: /src/clone/terraform/examples-01
-        volumeMounts:
-        - name:     argo-workdir
-          mountPath: /src
-
 
     - name:         decrypt
       container:
-        # image:      docker.io/olafradicke/alpine-sops:0.7.2
         image:      docker.io/olafradicke/fedora-sops:0.7.12-ci
         env:
         - name:     VAULT_ADDR
@@ -49,7 +34,7 @@ spec:
                       --config <(echo '') \
                       --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \
                       terragrunt.hcl.sops > terragrunt.hcl
-        workingDir: /src/clone/terraform/examples-01
+        workingDir: "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:     argo-workdir
           mountPath: /src
