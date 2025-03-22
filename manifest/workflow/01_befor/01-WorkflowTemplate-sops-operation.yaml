@@ -42,9 +42,11 @@ spec:
           value:    'http://vault-server.vault:8200'
         - name:     VAULT_TOKEN
           value:    'ChaNG_mE,plEAse!!'
+        command:    [sh, -c]
         args:
                     - |
-                      decrypt \
+                      sops --decrypt \
+                      --config <(echo '') \
                       --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \
                       terragrunt.hcl.sops > terragrunt.hcl
         workingDir: /src/clone/terraform/examples-01
