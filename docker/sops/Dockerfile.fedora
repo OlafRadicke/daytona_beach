@@ -1,0 +1,23 @@
+FROM fedora:41
+
+ENV USER=sops-user
+ENV GROUPNAME=$USER
+ENV SOPS_VERSION=v3.9.4
+
+RUN dnf install -y \
+    curl \
+    bash
+
+# Download the binary
+RUN curl -LO https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64 \
+    && mv sops-${SOPS_VERSION}.linux.amd64 /usr/local/bin/sops \
+	&& chmod +x /usr/local/bin/sops
+
+RUN  adduser \
+     --home-dir "$(pwd)" \
+	 --no-create-home \
+	$USER
+
+USER $USER
+
+ENTRYPOINT ["sops"]
