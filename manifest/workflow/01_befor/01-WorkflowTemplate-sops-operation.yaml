@@ -32,9 +32,11 @@ spec:
         - name:     argo-workdir
           mountPath: /src
 
+
     - name:         decrypt
       container:
-        image:      docker.io/olafradicke/alpine-sops:0.7.2
+        # image:      docker.io/olafradicke/alpine-sops:0.7.2
+        image:      docker.io/olafradicke/fedora-sops:0.7.12-ci
         env:
         - name:     VAULT_ADDR
           value:    'http://vault-server.vault:8200'
@@ -44,7 +46,6 @@ spec:
                     - |
                       decrypt \
                       --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \
-                      --keyservice 'http://vault-server.vault:8200' \
                       terragrunt.hcl.sops > terragrunt.hcl
         workingDir: /src/clone/terraform/examples-01
         volumeMounts:
