@@ -59,6 +59,7 @@ TODOs / TAGs
 - [X] 0.7.x - Integrate SOPS: Secrets OPerations
 - [ ] 0.8.x - Code cleanups
 - [ ] 0.9.x - Documentation
+- [ ] 0.10.x - Update `manifest/workflow/99_disabled/03-CronWorkflow-terraform-cronjob.yaml`
 
 EXTERNAL DOCUMENTATION
 ----------------------

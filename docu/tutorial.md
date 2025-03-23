@@ -57,7 +57,7 @@ Der Rest läuft automatisch mit Argo Workflows:
 - Durch die Verwendung von Vault und SOPS ist eine Key Rotation nicht zu aufwändig [^foot004] [^foot005]
 - Da die Geheimnisse im Terraform-Code direkt gespeichert werde, ist das Handling einfacher. Es nicht mehr notwendig sich mit separat tools wie *Keepass* zu behelfen um Geheimnisse sicher zu speichern.
 - Workflows sind sehr flexibel und können leicht angepasst werden
-- Mit YAML hat man eine Konfigurationssprache die eine geringe Einstiegshürde darstellt
+- Mit dem YAML-Format, hat man eine Konfigurationssprache die eine geringe Einstiegshürde darstellt
 - Es gibt zu `Argo Workflos`, `Mozilla SOPS` und `Hashicorp Vault` eine gute Dokumentationen, viele Beispiele und ein breite Nutzerbasis
 
 ### Nachteile / Einschränkungen
@@ -75,6 +75,12 @@ Als erstes brauch man ein lauffähigen Kubernetes. Entweder man hat schon einen,
 Die Skripte die im Folgendem verwendet werden nutzen das Tool [kubectx](https://github.com/ahmetb/kubectx). Entweder man installiert sich das Tool, oder entfernt es aus den Skripten.
 
 In den Skript muss auch noch der Name des Ziel-Cluster geändert werden, wenn man das Tool *kubectx* verwendet.
+
+Es werden zwei Namespaces werwendet. Zum anlegen kann man den folgenden Befehl nutzen:
+
+```bash
+$ kubernetes apply --wait=true  -f manifest/namespaces
+```
 
 ### Der Vault-Server
 
@@ -101,7 +107,7 @@ Für die nächsten Schritte muss CLT `vault` installiert sein. Installationsanle
 
 Von dem Tool werden zwei Umgebungsvariablen erwartet, die wir setzen müssen.
 
-Mit der FQDN unter der der Vault-server zu erreichen ist:
+Damit der FQDN unter der der Vault-server zu erreichen ist:
 
 ```bash
 $ export VAULT_ADDR=http://vault-server.vault:8200

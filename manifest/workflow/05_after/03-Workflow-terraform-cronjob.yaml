@@ -50,22 +50,6 @@ spec:
               - name:   gitBranch
                 value:  "main"
 
-# Vault Server setup
-
-        # # Enable transit support for Vault server
-        # - - name:       vault-enable-transit
-        #     templateRef:
-        #       name:     vault-operation
-        #       template: enable-transit
-        #     continueOn:
-        #       failed: true
-
-        # #  Create a default key (for example)
-        # - - name:       vault-create-key
-        #     templateRef:
-        #       name:     vault-operation
-        #       template: create-key
-
 # Mozilla SOPS operations
 
         # Check the version of SOPS
@@ -98,26 +82,19 @@ spec:
 
 # Terragrunt / Terraform / OpenTofu operations
 
-        - - name:       terragrunt-get-content-of-dir
-            templateRef:
-              name:     terragrunt-operation
-              template: get-content-of-dir
-
-        - - name:       terragrunt-get-version
-            templateRef:
-              name:     terragrunt-operation
-              template: get-terragrunt-version
-
+        # Run init step of Terraforn
         - - name:       terraform-run-init
             templateRef:
               name:     terragrunt-operation
               template: run-terraform-init
 
+        #  Run Terraform plan
         - - name:       terraform-run-plan
             templateRef:
               name:     terragrunt-operation
               template: run-terraform-plan
 
+        #  Run Terraform apply
         - - name:       terraform-run-apply
             templateRef:
               name:     terragrunt-operation
