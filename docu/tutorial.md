@@ -189,7 +189,7 @@ $ git push
 
 Der letzte Schritt ist nun, die Manifest-Dateien der Argo Workflows zu installieren. :fire: Hier ist zu beachten, das erst die `WorkflowTemplate` und dann erst die `Workflow` bzw. die `CronWorkflow` installiert werden müssen. Das Skript `scripts/ci-install.sh` tut das aber automatisch in der richtigen Reihenfolge.
 
-Um zu sehen ob alles funktioniere, können wir auf die Weboberfläche von Argo Workflows gehen. Wenn wir kein Ingress einrichten wollen, können wir das Skript `scripts/flow-portforward.sh` verwenden um ein `port-forward` aufzubauen.
+Um zu sehen ob alles funktioniere, können wir auf die Weboberfläche von Argo Workflows gehen. Wenn wir kein Ingress einrichten wollen, können wir das Skript `scripts/flow-portforward.sh` verwenden um ein `port-forward` aufzubauen. Danach ist die Weboberfläche über [https://localhost:2746/](https://localhost:2746/) erreichbar.
 
 Kommt es zu Fehlern, kann man das Skript `scripts/flow-get.sh` verwenden, um das Problem einzukreisen. Es gibt auf der Kommandozeile den status der Workflows-Objekt zurück.
 
