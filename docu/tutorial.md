@@ -196,7 +196,7 @@ Kommt es zu Fehlern, kann man das Skript `scripts/flow-get.sh` verwenden, um das
 
 ### Zur Details der Implementierung
 
-Der Code in der Datei `../manifest/workflow/05_after/03-Workflow-terraform-cronjob.yaml` ist sehr detektiert Kommentiert.
+Der Code in der Datei *[03-Workflow-terraform-cronjob.yaml](../manifest/workflow/05_after/03-Workflow-terraform-cronjob.yaml)* ist sehr detektiert Kommentiert.
 
 ----
 
