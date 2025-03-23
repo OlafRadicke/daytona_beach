@@ -24,7 +24,20 @@ DER LÖSUNGSANSATZ
 
 Ein etabliertes Tool aus der *Alten Welt*, vor Kubernetes, ist das Konfigurations-Tool *Terraform* oder in seinem aktuellen Fork *OpenTofu*. Es hat ein enorm grosses Ökosystem, das zu fast jedem Problem eine fertige Lösung anzubieten hat. Solange wie die alten Tools aus der Alten welt, nicht *Kubernetes Ready* sind, kann man versuchen mit Terraform die Schwächen zu kompensieren.
 
-Nur wie schafft man das ohne Medienbruch. Weder will man Terraform/OpenTofu auf seinen lokalem Rechner laufen lassen[^foot001]. Noch möchte man extra eine Virtuelle Maschin dafür aufsetzen und betreiben. Die naheliegende Idee ist natürlich Terraform/OpenTofu in Kubernetes laufen zu lassen. Un das möglichst auf unkomplizierte weise. Wie das aussehen kann, wird mit dem Code in diesem Repro demonstriert.
+Nur wie schafft man das ohne Medienbruch. Weder will man Terraform/OpenTofu auf seinen lokalem Rechner laufen lassen[^foot001]. Noch möchte man extra eine Virtuelle Maschin dafür aufsetzen und betreiben. Die naheliegende Idee ist natürlich Terraform/OpenTofu in Kubernetes laufen zu lassen. Un das möglichst auf unkomplizierte weise. Wie das aussehen kann, wird mit dem Code in diesem Git Repository demonstriert.
+
+Das Big Picture sie wie folgt aus:
+
+- Es wird ein Secret mit dem Vault-Server-Token erstellt
+- Es wird ein *Hashicorp Vault-Server* in einem Kubernetes installier
+- Mit Hilfe dieses Vault-Servers wird im Verzeichnis Terraform-Beispiel[^foot002] eine Datei mit Passwörtern verschlüsselt und in Git commited.
+- Dann wird *Argo Workflows* in Kubernetes installiert
+- Zum Schluss werden die Manifest-Dateien auf Kubernetes installiert, die die CI/CD-pipelines enthalten
+
+Der Rest läuft automatisch mit Argo Workflows:
+
+- Der
+
 
 SCHRITT-FÜR-SCHRITT-ANLEITUNG
 -----------------------------
@@ -32,3 +45,4 @@ SCHRITT-FÜR-SCHRITT-ANLEITUNG
 #TODO
 
 [^foot001]: Sonst läuft man wieder in das *for-me-works-Problem* rein. Sprich, bei dem einen Kollegen funktioniert es, und die anderen wissen nicht, was sie falsch gemacht haben, das es bei ihnen nicht funktioniert.
+[^foot002]: Ist in diesen Repository unter `terraform/examples-01` zu finden.
