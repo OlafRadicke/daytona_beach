@@ -196,7 +196,9 @@ Kommt es zu Fehlern, kann man das Skript `scripts/flow-get.sh` verwenden, um das
 
 ### Zur Details der Implementierung
 
-Der Code in der Datei *[03-Workflow-terraform-cronjob.yaml](../manifest/workflow/05_after/03-Workflow-terraform-cronjob.yaml)* ist sehr detektiert Kommentiert.
+Der Code in der Datei *[03-Workflow-terraform.yaml](../manifest/workflow/05_after/03-Workflow-terraform.yaml)* ist sehr detektiert Kommentiert.
+
+Die CI/CD-Pipeline wird nur einmal aufgeführt. Möchte man, das der Workflow alle X Minuten aufgerufen wird, verwendet man `CronWorkflow` statt `Workflow` so wie in [03-CronWorkflow-terraform.yaml](../manifest/workflow/99_disabled/03-CronWorkflow-terraform.yaml) gezeigt.
 
 ----
 
