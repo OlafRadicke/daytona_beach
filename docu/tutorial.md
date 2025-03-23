@@ -18,7 +18,8 @@ TUTORAL
 		- [Vorbereitung](#vorbereitung)
 		- [Der Vault-Server](#der-vault-server)
 		- [Schlüsselmaterial erstellen](#schlüsselmaterial-erstellen)
-		- [Init key](#init-key)
+		- [Geheimnisse im Terraform-Code verschlüsseln](#geheimnisse-im-terraform-code-verschlüsseln)
+		- [Workflow-CI/CD laufen lassen](#workflow-cicd-laufen-lassen)
 
 
 HINTERGRUND / EINFÜHRUNG
@@ -93,11 +94,8 @@ Der Eintrag könnte etwa so aussehen:
 
 Denn der Vault-Service wird im Namespace `vault` mit dem Namen `vault-server` laufen.
 
-
 ### Schlüsselmaterial erstellen
 
-
-### Init key
 
 Für die nächsten Schritte muss CLT `vault` installiert sein. Installationsanleitung siehe [HIER](https://developer.hashicorp.com/vault/tutorials/get-started/install-binary).
 
@@ -148,6 +146,45 @@ $ vault write sops/keys/default type=rsa-4096
 
 Success! Data written to: sops/keys/default
 ```
+
+### Geheimnisse im Terraform-Code verschlüsseln
+
+:fire: Für diesen Schritt muss der `port-forward` zum Vault-Server aktiviert sein (Siehe Oben)!
+
+Es gibt in den Verzeichnis mit dem Terraform-Beispiel-Code ein Unterverzeichnis `terraform/examples-01/sops-clear-text` in dem eine Terragrunt-Datei mit einem Passwort in Klartext liegt (`user_password`). Diese Datei werden wir jetzt mit unserem neu generiertem Key verschlüsseln und an seinem zugedachtem Ort im Verzeichnis `terraform/examples-01` speichern. Beachte, das ter Token in `VAULT_TOKEN` auch der ist, mit dem der Vault-Server konfiguriert wurde.
+
+```bash
+$ export VAULT_ADDR=http://vault-server.vault:8200
+$ export VAULT_TOKEN='ChaNG_mE,plEAse!!'
+$ sops encrypt \
+  --hc-vault-transit $VAULT_ADDR/v1/sops/keys/default \
+  terraform/examples-01/sops-clear-text/terragrunt.hcl \
+  > terraform/examples-01/terragrunt.hcl.sops
+```
+
+Wenn wir uns jetzt die Datei `terraform/examples-01/terragrunt.hcl` ansehen, stellen wir fest, dass das Passwort nicht mehr lesbar ist.
+
+Wenn wir testen wollen, ob wir die Datei auch wieder entschlüsseln können, geht das über diesen Befehl:
+
+```bash
+$ sops decrypt terraform/examples-01/terragrunt.hcl.sops
+```
+
+Damit die Workflows-CI/CD die Datei auch per Git pullen kann, dürfen wir nicht vergessen, sie auch zu commiten.
+
+```bash
+$ git add terraform/examples-01/terragrunt.hcl.sops
+$ git commit -m 'Add cryped terragrunt file with password.'
+$ git push
+```
+
+### Workflow-CI/CD laufen lassen
+
+Der letzte Schritt ist nun, die Manifest-Dateien der Argo Workflows zu installieren. :fire: Hier ist zu beachten, das erst die `WorkflowTemplate` und dann erst die `Workflow` bzw. die `CronWorkflow` installiert werden müssen. Das Skript `scripts/ci-install.sh` tut das aber automatisch in der richtigen Reihenfolge.
+
+Um zu sehen ob alles funktioniere, können wir auf die Weboberfläche von Argo Workflows gehen. Wenn wir kein Ingress einrichten wollen, können wir das Skript `scripts/flow-portforward.sh` verwenden um ein `port-forward` aufzubauen.
+
+Kommt es zu Fehlern, kann man das Skript `scripts/flow-get.sh` verwenden, um das Problem einzukreisen. Es gibt auf der Kommandozeile den status der Workflows-Objekt zurück.
 
 
 ----
