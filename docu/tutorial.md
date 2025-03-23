@@ -1,7 +1,7 @@
 TUTORAL
 =======
 
-| <div style="width:30%">![en-flag](pics/United_Kingdom_and_United_States_flags.svg.png)</div> | [translate this page in english](https://github-com.translate.goog/OlafRadicke/daytona_beach/blob/main/docu/tutorial.md?_x_tr_sl=de&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) |
+| <div style="width:20%">![en-flag](pics/United_Kingdom_and_United_States_flags.svg.png)</div> | [translate this page in english](https://github-com.translate.goog/OlafRadicke/daytona_beach/blob/main/docu/tutorial.md?_x_tr_sl=de&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp) |
 |:--|--:|
 
 - [TUTORAL](#tutoral)
