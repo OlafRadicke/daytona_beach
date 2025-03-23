@@ -99,15 +99,27 @@ Denn der Vault-Service wird im Namespace `vault` mit dem Namen `vault-server` la
 
 ### Init key
 
+Für die nächsten Schritte muss CLT `vault` installiert sein. Installationsanleitung siehe [HIER](https://developer.hashicorp.com/vault/tutorials/get-started/install-binary).
+
+Von dem Tool werden zwei Umgebungsvariablen erwartet, die wir setzen müssen.
+
+Mit der FQDN unter der der Vault-server zu erreichen ist:
+
 ```bash
-$ # Substitute this with the address Vault is running on
-$ export VAULT_ADDR=http://127.0.0.1:8200
+$ export VAULT_ADDR=http://vault-server.vault:8200
+```
 
-$ # this may not be necessary in case you previously used `vault login` for production use
+Und der Token, mit dem wir und authentifizieren, das muss der gleiche Token sein, den wir auch bei der Installation des Vault-Servers verwendet haben[^foot006]:
+
+```bash
 $ export VAULT_TOKEN=toor
+```
 
-$ # to check if Vault started and is configured correctly
+Um zu überprüfen ob alles passe, machen wir eine Statusabfrage:
+
+```bash
 $ vault status
+
 Key             Value
 ---             -----
 Seal Type       shamir
@@ -119,14 +131,22 @@ Version         1.2.0
 Cluster Name    vault-cluster-618cc902
 Cluster ID      e532e461-e8f0-1352-8a41-fc7c11096908
 HA Enabled      false
+```
 
-$ # It is required to enable a transit engine if not already done (It is suggested to create a transit engine specifically for SOPS, in which it is possible to have multiple keys with various permission levels)
+Wenn es keine Fehler gibt, machen wir weiter mit der erforderlichen Aktivierung eine Transit-Engine. falls dies noch nicht geschehen ist. Es wird empfohlen, eine Transit-Engine speziell für SOPS zu erstellen, in der mehrere Schlüssel mit unterschiedlichen Berechtigungsstufen vorhanden sein können.
+
+```bash
 $ vault secrets enable -path=sops transit
-Success! Enabled the transit secrets engine at: sops/
 
-$ # Then create one or more keys
-$ vault write sops/keys/firstkey type=rsa-4096
-Success! Data written to: sops/keys/firstkey
+Success! Enabled the transit secrets engine at: sops/
+```
+
+Jetzt ist es an der Zeit, das Schlüsselmaterial vom Vault generieren zu lassen, mit dem wir unsere Geheimnisse im Terraform-Coder verschlüsseln wollen:
+
+```bash
+$ vault write sops/keys/default type=rsa-4096
+
+Success! Data written to: sops/keys/default
 ```
 
 
@@ -137,3 +157,4 @@ Success! Data written to: sops/keys/firstkey
 [^foot003]: In unserem Fall ist es nur ein "Hallo-Welt" ausgeben um zu zeigen, das die Passwörter erfolgreich entschlüsselt wurde.
 [^foot004]: Siehe [Key rotation mit Vault](https://developer.hashicorp.com/vault/docs/internals/rotation)
 [^foot005]: Siehe [Key Rotation mit SOPS](https://github.com/getsops/sops?tab=readme-ov-file#key-rotation)
+[^foot006]: Der steht in der Datei `manifest/services/01-Secret-vault-token.yaml`
