@@ -1,7 +1,13 @@
 TUTORAL
 =======
 
-[translate this page in english]()
+[translate this page in english](https://github-com.translate.goog/OlafRadicke/daytona_beach/blob/main/docu/tutorial.md?_x_tr_sl=de&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp)
+
+- [TUTORAL](#tutoral)
+	- [HINTERGRUND / EINFÜHRUNG](#hintergrund--einführung)
+	- [DER LÖSUNGSANSATZ](#der-lösungsansatz)
+	- [SCHRITT-FÜR-SCHRITT-ANLEITUNG](#schritt-für-schritt-anleitung)
+
 
 HINTERGRUND / EINFÜHRUNG
 ------------------------
@@ -20,4 +26,4 @@ SCHRITT-FÜR-SCHRITT-ANLEITUNG
 
 #TODO
 
-[^foot001] Sonst läuft man wieder in das *for-me-works-Problem* rein. Sprich, bei dem einen Kollegen funktioniert es, und die anderen wissen nicht, was sie falsch gemacht haben, das es bei ihnen nicht funktioniert.
+[^foot001]: Sonst läuft man wieder in das *for-me-works-Problem* rein. Sprich, bei dem einen Kollegen funktioniert es, und die anderen wissen nicht, was sie falsch gemacht haben, das es bei ihnen nicht funktioniert.

@@ -8,7 +8,7 @@ A experimental repo for SOPS, TOFU and ArgoCD-Workflow exercises and experience.
 	- [HOW-TO](#how-to)
 		- [Helper scripts](#helper-scripts)
 	- [CI/CD](#cicd)
-	- [TODOs](#todos)
+	- [TODOs / TAGs](#todos--tags)
 	- [EXTERNAL DOCUMENTATION](#external-documentation)
 
 
@@ -22,7 +22,8 @@ KNOWN ISSUES
 HOW-TO
 ------
 
-Open #todo ...
+See the [german tutoral](docu/tutorial.md) or the [english translation](https://github-com.translate.goog/OlafRadicke/daytona_beach/blob/main/docu/tutorial.md?_x_tr_sl=de&_x_tr_tl=en&_x_tr_hl=de&_x_tr_pto=wapp).
+
 
 ### Helper scripts
 
@@ -46,8 +47,8 @@ CI/CD
 Github Action is used for building needed customized images.
 
 
-TODOs
------
+TODOs / TAGs
+------------
 
 - [X] 0.0.x - Enable CronWorkflow
 - [X] 0.2.x - Vault Server
