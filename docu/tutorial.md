@@ -6,8 +6,6 @@ TUTORAL
 |:--|--:|
 
 
-<!-- width -->
-
 - [TUTORAL](#tutoral)
 	- [HINTERGRUND / EINFÜHRUNG](#hintergrund--einführung)
 	- [DER LÖSUNGSANSATZ](#der-lösungsansatz)
@@ -19,8 +17,10 @@ TUTORAL
 		- [Der Vault-Server](#der-vault-server)
 		- [Schlüsselmaterial erstellen](#schlüsselmaterial-erstellen)
 		- [Geheimnisse im Terraform-Code verschlüsseln](#geheimnisse-im-terraform-code-verschlüsseln)
+		- [Argo Workflows installation](#argo-workflows-installation)
 		- [Workflow-CI/CD laufen lassen](#workflow-cicd-laufen-lassen)
 		- [Zur Details der Implementierung](#zur-details-der-implementierung)
+	- [WEITERFḦRENDE DOKUMENTATIONEN](#weiterfḧrende-dokumentationen)
 
 
 HINTERGRUND / EINFÜHRUNG
@@ -185,6 +185,12 @@ $ git commit -m 'Add cryped terragrunt file with password.'
 $ git push
 ```
 
+### Argo Workflows installation
+
+Die Installation von *Argo Workflows* kann mit den Skript `scripts/flow-install.sh` erfolgen. Hierbei ist eigentlich nichts zu beachten.
+
+Für weitere Informationen sei auf die Projektseite verwiesen: [github.com/argoproj/argo-workflows](https://github.com/argoproj/argo-workflows/blob/main/README.md)
+
 ### Workflow-CI/CD laufen lassen
 
 Der letzte Schritt ist nun, die Manifest-Dateien der Argo Workflows zu installieren. :fire: Hier ist zu beachten, das erst die `WorkflowTemplate` und dann erst die `Workflow` bzw. die `CronWorkflow` installiert werden müssen. Das Skript `scripts/ci-install.sh` tut das aber automatisch in der richtigen Reihenfolge.
@@ -201,6 +207,19 @@ Kommt es zu Fehlern, kann man das Skript `scripts/flow-get.sh` verwenden, um das
 Der Code in der Datei *[03-Workflow-terraform.yaml](../manifest/workflow/05_after/03-Workflow-terraform.yaml)* ist sehr detektiert Kommentiert.
 
 Die CI/CD-Pipeline wird nur einmal aufgeführt. Möchte man, das der Workflow alle X Minuten aufgerufen wird, verwendet man `CronWorkflow` statt `Workflow` so wie in [03-CronWorkflow-terraform.yaml](../manifest/workflow/99_disabled/03-CronWorkflow-terraform.yaml) gezeigt.
+
+
+
+WEITERFḦRENDE DOKUMENTATIONEN
+-----------------------------
+
+* [Encrypting using Hashicorp Vault](https://github.com/getsops/sops?tab=readme-ov-file#encrypting-using-hashicorp-vault)
+* [Argo Workflow Git-Repo](https://github.com/argoproj/argo-workflows?tab=readme-ov-file)
+* [Examples](https://github.com/argoproj/argo-workflows/tree/main/examples)
+* [Cron workflows](https://argo-workflows.readthedocs.io/en/latest/cron-workflows/)
+* [Volumes](https://argo-workflows.readthedocs.io/en/latest/walk-through/volumes/)
+* [Workflow Templates](https://argo-workflows.readthedocs.io/en/latest/workflow-templates/)
+* [Teragrunt](https://terragrunt.gruntwork.io/)
 
 ----
 

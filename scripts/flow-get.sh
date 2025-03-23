@@ -10,5 +10,5 @@ kubectx atlantic-ocean
 kubectl get node
 
 kubectl -n argo get CronWorkflow
-kubectl -n argo get  Workflow
-kubectl -n argo get  WorkflowTemplate
+kubectl -n argo get Workflow
+kubectl -n argo get WorkflowTemplate
