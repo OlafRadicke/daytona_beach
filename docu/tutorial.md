@@ -191,6 +191,8 @@ Der letzte Schritt ist nun, die Manifest-Dateien der Argo Workflows zu installie
 
 Um zu sehen ob alles funktioniere, können wir auf die Weboberfläche von Argo Workflows gehen. Wenn wir kein Ingress einrichten wollen, können wir das Skript `scripts/flow-portforward.sh` verwenden um ein `port-forward` aufzubauen. Danach ist die Weboberfläche über [https://localhost:2746/](https://localhost:2746/) erreichbar.
 
+![Weboberfläche von Argo Workflows](pics/screenshot-workflows.png)
+
 Kommt es zu Fehlern, kann man das Skript `scripts/flow-get.sh` verwenden, um das Problem einzukreisen. Es gibt auf der Kommandozeile den status der Workflows-Objekt zurück.
 
 
