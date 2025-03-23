@@ -20,6 +20,7 @@ TUTORAL
 		- [Schlüsselmaterial erstellen](#schlüsselmaterial-erstellen)
 		- [Geheimnisse im Terraform-Code verschlüsseln](#geheimnisse-im-terraform-code-verschlüsseln)
 		- [Workflow-CI/CD laufen lassen](#workflow-cicd-laufen-lassen)
+		- [Zur Details der Implementierung](#zur-details-der-implementierung)
 
 
 HINTERGRUND / EINFÜHRUNG
@@ -192,6 +193,10 @@ Um zu sehen ob alles funktioniere, können wir auf die Weboberfläche von Argo W
 
 Kommt es zu Fehlern, kann man das Skript `scripts/flow-get.sh` verwenden, um das Problem einzukreisen. Es gibt auf der Kommandozeile den status der Workflows-Objekt zurück.
 
+
+### Zur Details der Implementierung
+
+Der Code in der Datei `../manifest/workflow/05_after/03-Workflow-terraform-cronjob.yaml` ist sehr detektiert Kommentiert.
 
 ----
 
