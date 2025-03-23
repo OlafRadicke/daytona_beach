@@ -17,6 +17,8 @@ TUTORAL
 	- [SCHRITT-FÜR-SCHRITT-ANLEITUNG](#schritt-für-schritt-anleitung)
 		- [Vorbereitung](#vorbereitung)
 		- [Der Vault-Server](#der-vault-server)
+		- [Schlüsselmaterial erstellen](#schlüsselmaterial-erstellen)
+		- [Init key](#init-key)
 
 
 HINTERGRUND / EINFÜHRUNG
@@ -69,6 +71,9 @@ SCHRITT-FÜR-SCHRITT-ANLEITUNG
 
 Als erstes brauch man ein lauffähigen Kubernetes. Entweder man hat schon einen, erstellt sich einen in der (Public-)Cloud oder installiert sich local [K3s](https://docs.k3s.io/installation)
 
+Die Skripte die im Folgendem verwendet werden nutzen das Tool [kubectx](https://github.com/ahmetb/kubectx). Entweder man installiert sich das Tool, oder entfernt es aus den Skripten.
+
+In den Skript muss auch noch der Name des Ziel-Cluster geändert werden, wenn man das Tool *kubectx* verwendet.
 
 ### Der Vault-Server
 
@@ -76,7 +81,53 @@ Für die Installation des Vault-Servers gibt es das Script `scripts/vault-server
 
 Zu deinstallation gibt es das Skript `scripts/vault-server-remove.sh`.
 
+Damit der Vault-Server für unseren nächsten Schritte auch lokal verfügbar ist, brauchen wir noch ein `port-forward` erstellt werden. Hier bei hilft das Skript `scripts/vault-portforward.sh`.
 
+:fire: Damit der Vault-Server im Cluster und lokal bei uns unter den selben Namen erreichbar ist, muss noch ein Eintrag in der `/etc/hosts` gemacht werden. Das ist insofern wichtig, das SOPS den FQDN des Key-Server (Vault-Server) als Meta-Information in der Verschlüsselten Datei speichert.
+
+Der Eintrag könnte etwa so aussehen:
+
+```
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4 vault-server.vault
+```
+
+Denn der Vault-Service wird im Namespace `vault` mit dem Namen `vault-server` laufen.
+
+
+### Schlüsselmaterial erstellen
+
+
+### Init key
+
+```bash
+$ # Substitute this with the address Vault is running on
+$ export VAULT_ADDR=http://127.0.0.1:8200
+
+$ # this may not be necessary in case you previously used `vault login` for production use
+$ export VAULT_TOKEN=toor
+
+$ # to check if Vault started and is configured correctly
+$ vault status
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    1
+Threshold       1
+Version         1.2.0
+Cluster Name    vault-cluster-618cc902
+Cluster ID      e532e461-e8f0-1352-8a41-fc7c11096908
+HA Enabled      false
+
+$ # It is required to enable a transit engine if not already done (It is suggested to create a transit engine specifically for SOPS, in which it is possible to have multiple keys with various permission levels)
+$ vault secrets enable -path=sops transit
+Success! Enabled the transit secrets engine at: sops/
+
+$ # Then create one or more keys
+$ vault write sops/keys/firstkey type=rsa-4096
+Success! Data written to: sops/keys/firstkey
+```
 
 
 ----
