@@ -1,0 +1,114 @@
+apiVersion:             argoproj.io/v1alpha1
+kind:                   CronWorkflow
+metadata:
+  name:                 terraform-cronjob
+spec:
+  schedule:             "*/1 * * * *"
+  concurrencyPolicy:    "Forbid"
+  # startingDeadlineSeconds: 0
+  successfulJobsHistoryLimit: 6
+  failedJobsHistoryLimit: 3
+
+  workflowSpec:
+    entrypoint:         start-terraform-cronjob
+    archiveLogs:        true
+
+    # workflowTemplateRef:
+    #   name: start-terraform-cronjob
+
+    # Global arguments for WorkflowTemplates
+    arguments:
+      parameters:
+      - name:             example-path
+        value:            /src/clone/terraform/examples-01
+
+  # A PVC for hand over the working directory between
+  # singles steps and his containers.
+    volumeClaimTemplates:
+    - metadata:
+        name:           argo-workdir
+      spec:
+        accessModes:    [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage:    1Gi
+    # Persistent pvc for the backend of Terraform/OpenTofu
+    volumes:
+      - name:             tofu-backend-vol
+        persistentVolumeClaim:
+          claimName:      tofu-backend
+
+    templates:
+      - name:           start-terraform-cronjob
+        steps:
+# vault
+# Checks the connection to the Vaultserver
+
+        - - name:       vault-get-status
+            templateRef:
+              name:     vault-operation
+              template: get-vault-status
+
+# git
+# Clone the Terraform code from a Git repository
+
+        - - name:       clone-terraform-code-from-git
+            templateRef:
+              name:     git-operation
+              template: git-clone
+            arguments:
+              parameters:
+              - name:   gitRepo
+                value:  https://github.com/OlafRadicke/daytona_beach.git
+              - name:   gitBranch
+                value:  "main"
+
+# Mozilla SOPS operations
+
+        # Check the version of SOPS
+        - - name:       sops-get-version
+            templateRef:
+              name:     sops-operation
+              template: get-version
+
+        # List the conten of the git clone before the
+        # the secrets a be decrypted.
+        - - name:       sops-get-conten-of-dir-before
+            templateRef:
+              name:     sops-operation
+              template: get-conten-of-dir
+
+
+        # Decrypt the secret with help of SOPS and the
+        # Vault server.
+        - - name:       decrypt-with-secret
+            templateRef:
+              name:     sops-operation
+              template: decrypt-with-secret
+
+        # List the conten fof die example directory after
+        # decryption operation.
+        - - name:       sops-get-conten-of-dir-after
+            templateRef:
+              name:     sops-operation
+              template: get-conten-of-dir
+
+# Terragrunt / Terraform / OpenTofu operations
+
+        # Run init step of Terraforn
+        - - name:       terraform-run-init
+            templateRef:
+              name:     terragrunt-operation
+              template: run-terraform-init
+
+        #  Run Terraform plan
+        - - name:       terraform-run-plan
+            templateRef:
+              name:     terragrunt-operation
+              template: run-terraform-plan
+
+        #  Run Terraform apply
+        - - name:       terraform-run-apply
+            templateRef:
+              name:     terragrunt-operation
+              template: run-terraform-apply

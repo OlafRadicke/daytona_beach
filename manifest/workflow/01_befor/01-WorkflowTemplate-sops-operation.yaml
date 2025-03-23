@@ -14,6 +14,7 @@ spec:
         image:      docker.io/olafradicke/alpine-sops:0.7.2
         command:    [sh, -c]
         args:       ["ls -lah"]
+        # workingDir: "/src/clone"
         workingDir: "{{workflow.parameters.example-path}}"
         volumeMounts:
         - name:     argo-workdir
