@@ -10,8 +10,6 @@ A experimental repo for SOPS, OpenTofu and ArgoCD-Workflow exercises and experie
 	- [TODOs / TAGs / PROJECT STATE](#todos--tags--project-state)
 
 
-
-
 HOW-TO
 ------
 
@@ -41,7 +39,8 @@ TODOs / TAGs / PROJECT STATE
 - [X] 0.5.x - Add OpenTofu backend (PVC/local `-backend-config=PATH`)
 - [X] 0.6.x - run OpenTofu code
 - [X] 0.7.x - Integrate SOPS: Secrets OPerations
-- [ ] 0.8.x - Code cleanups
-- [ ] 0.9.x - Documentation
-- [ ] 0.10.x - Update `manifest/workflow/99_disabled/03-CronWorkflow-terraform.yaml`
+- [X] 0.8.x - Code cleanups
+- [X] 0.9.x - Documentation
+- [X] 0.10.x - Update `manifest/workflow/99_disabled/03-CronWorkflow-terraform.yaml`
+- [X] 1.0.x - first final version
 
