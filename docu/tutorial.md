@@ -15,6 +15,7 @@ TUTORAL
 		- [Vorteile](#vorteile)
 		- [Nachteile / Einschränkungen](#nachteile--einschränkungen)
 	- [SCHRITT-FÜR-SCHRITT-ANLEITUNG](#schritt-für-schritt-anleitung)
+		- [Vorbereitung](#vorbereitung)
 		- [Der Vault-Server](#der-vault-server)
 
 
@@ -52,6 +53,9 @@ Der Rest läuft automatisch mit Argo Workflows:
 - Der Terraform-State mit seinen Geheimnissen im Klartext bleibt per PVC in Kubernetes
 - Durch die Verwendung von Vault und SOPS ist eine Key Rotation nicht zu aufwändig [^foot004] [^foot005]
 - Da die Geheimnisse im Terraform-Code direkt gespeichert werde, ist das Handling einfacher. Es nicht mehr notwendig sich mit separat tools wie *Keepass* zu behelfen um Geheimnisse sicher zu speichern.
+- Workflows sind sehr flexibel und können leicht angepasst werden
+- Mit YAML hat man eine Konfigurationssprache die eine geringe Einstiegshürde darstellt
+- Es gibt zu `Argo Workflos`, `Mozilla SOPS` und `Hashicorp Vault` eine gute Dokumentationen, viele Beispiele und ein breite Nutzerbasis
 
 ### Nachteile / Einschränkungen
 
@@ -61,8 +65,16 @@ Der Rest läuft automatisch mit Argo Workflows:
 SCHRITT-FÜR-SCHRITT-ANLEITUNG
 -----------------------------
 
+### Vorbereitung
+
+Als erstes brauch man ein lauffähigen Kubernetes. Entweder man hat schon einen, erstellt sich einen in der (Public-)Cloud oder installiert sich local [K3s](https://docs.k3s.io/installation)
+
+
 ### Der Vault-Server
 
+Für die Installation des Vault-Servers gibt es das Script `scripts/vault-server-install.sh`. Das Installations-Setup ist aber nicht für den produktiven Einsatz geeignet. Zu beachten ist auch, das die Daten des Servers nicht persistent auf einem PVC liegen. Ein Restart/Reinstallation für also zu dem Verlust der dort generierten Keys.
+
+Zu deinstallation gibt es das Skript `scripts/vault-server-remove.sh`.
 
 
 
